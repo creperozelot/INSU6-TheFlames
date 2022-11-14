@@ -1,0 +1,15 @@
+name: INSU6
+version: '${project.version}'
+main: INSU.creperozelot.main
+authors: [ creperozelot, PixelMandel ]
+description: Insu 6 Plugin
+website: https://the-flames.de
+commands:
+  spec:
+    description: Setzt dich in den Spec Modus und Umgekehrt.
+    permission: insu.admin.spec
+    permission-message: §cDu hast keine Berechtigung dafür!
+  registerteam:
+    description: Regestriert ein team.
+    permission: insu.admin.registerteam
+    permission-message: §cDu hast keine Berechtigung dafür!

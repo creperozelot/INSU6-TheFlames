@@ -1,0 +1,15 @@
+main:
+  prefix: '§e§lIN§6§lSU §f§l6 §r§7|§6 '
+
+dc:
+  bot:
+    token: 'MTAzOTkwNzkxODcxNzM5MDg2OA.G2t9Uc.FWt8rO66hKXYzB02gtDrbbFKuAKZHd7SRPn0X0'
+    prefix: '!'
+    channelid: ''
+
+mysql:
+  host: 'root'
+  port: '3306'
+  username: 'root'
+  password: 'root'
+  db: 'root'
