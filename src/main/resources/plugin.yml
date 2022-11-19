@@ -4,6 +4,8 @@ main: INSU.creperozelot.main
 authors: [ creperozelot, PixelMandel ]
 description: Insu 6 Plugin
 website: https://the-flames.de
+#  depend:
+# - CrossplatForms
 commands:
   spec:
     description: Setzt dich in den Spec Modus und Umgekehrt.
