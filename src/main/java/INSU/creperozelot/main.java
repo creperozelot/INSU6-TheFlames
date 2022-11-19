@@ -3,6 +3,8 @@ package INSU.creperozelot;
 import INSU.creperozelot.commands.CommandSpec;
 import INSU.creperozelot.commands.CommandTeamRegister;
 import INSU.creperozelot.dc.bot.botlogic;
+import INSU.creperozelot.events.BetterWatchOut;
+import INSU.creperozelot.events.Glueckstreffer;
 import INSU.creperozelot.listener.OnPlayerChat;
 import INSU.creperozelot.listener.PlayerJoinListener;
 import INSU.creperozelot.listener.PlayerLeaveListener;
@@ -61,7 +63,8 @@ public final class main extends JavaPlugin {
     private void registerCommand() {
         //this.getCommand("heal").setExecutor(new CommandHeal());
         this.getCommand("spec").setExecutor(new CommandSpec());
-        this.getCommand("registerteam").setExecutor(new CommandTeamRegister());
+        this.getCommand("glueckstreffer").setExecutor(new Glueckstreffer());
+        this.getCommand("BetterWatchOut").setExecutor(new BetterWatchOut());
     }
 
     private void registerListener() {

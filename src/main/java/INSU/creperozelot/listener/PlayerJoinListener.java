@@ -19,15 +19,24 @@ public class PlayerJoinListener implements Listener {
         Player player = event.getPlayer();
         int OnlinePlayers = Bukkit.getOnlinePlayers().size();
 
-        event.setJoinMessage(StaticCache.prefix + "Der Spieler §e" + player.getName() + "§6 ist dem Projekt Beigetreten.");
+        event.setJoinMessage(StaticCache.prefix + "Der Spieler §e" + player.getDisplayName() + "§6 ist dem Projekt Beigetreten.");
         player.sendMessage(StaticCache.prefix + "§cBEACHTE! Alles was du sagst wird geloggt! Wähle deine Worte weise.");
         player.sendMessage(StaticCache.prefix + "Es sind §e" + OnlinePlayers + "§f Spieler §aOnline...");
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 15, 255, false, false, Color.BLACK), false);
         player.sendTitle("§6Achtung...", "§cDu bist für 15 Skunden nicht Verwundbar", 0, 80, 20);
+        player.sendMessage(StaticCache.prefix + "§aDu bist im Team §6" + MYSQL.getTeambyName(player.getName()));
+
+        //players stuff
+        if (MYSQL.isGameMaster(player.getName())) {
+            player.setDisplayName("§e§lGamemaster §r§8|§r§f " + player.getName());
+        } else {
+            String teamname = MYSQL.getTeambyName(player.getName());
+            player.setDisplayName("§6" + teamname + " §8§r|§f " + player.getName());
+        }
 
         //MYSQL
         if (!MYSQL.PlayerExist(player.getName())) {
-            MYSQL.update("INSERT INTO `INSU`(`PLAYER`, `DEATH`, `ID`, `TEAM`, `ISGAMEMASTER`) VALUES ('" + player.getName() + "','0','-1','NONE','false');");
+            MYSQL.update("INSERT INTO `INSU`(`PLAYER`, `DEATH`, `ID`, `TEAM`, `ISGAMEMASTER`) VALUES ('" + player.getName() + "','0','-1','','false');");
         }
     }
 }

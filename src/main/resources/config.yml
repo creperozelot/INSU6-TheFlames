@@ -1,5 +1,8 @@
 main:
   prefix: '§e§lIN§6§lSU §f§l6 §r§7|§6 '
+  #DO NOT TOUCH BEGIN-----------------------------------------------------------
+  started: false
+  #DO NOT TOUCH END-----------------------------------------------------------
 
 dc:
   bot:
@@ -7,9 +10,13 @@ dc:
     prefix: '!'
     channelid: ''
 
+
+
 mysql:
   host: 'root'
   port: '3306'
   username: 'root'
   password: 'root'
   db: 'root'
+
+  #DO NOT TOUCH THIS!

@@ -9,7 +9,11 @@ commands:
     description: Setzt dich in den Spec Modus und Umgekehrt.
     permission: insu.admin.spec
     permission-message: §cDu hast keine Berechtigung dafür!
-  registerteam:
-    description: Regestriert ein team.
-    permission: insu.admin.registerteam
+  glueckstreffer:
+    description: Startet das Event Glückstreffer.
+    permission: insu.admin.event.glueckstreffer
+    permission-message: §cDu hast keine Berechtigung dafür!
+  BetterWatchOut:
+    description: Start das Event BetterWatchOut.
+    permission: insu.admin.event.BetterWatchOut
     permission-message: §cDu hast keine Berechtigung dafür!

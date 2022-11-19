@@ -18,5 +18,6 @@ public class StaticCache {
     public static String username = main.getInstance().getConfig().getString("mysql.username");
 
     public static String password = main.getInstance().getConfig().getString("mysql.password");
+    public static boolean countdownactive = false;
 
 }

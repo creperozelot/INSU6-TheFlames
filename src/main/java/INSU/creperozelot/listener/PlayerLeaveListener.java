@@ -11,6 +11,6 @@ public class PlayerLeaveListener implements Listener {
     public void PlayerLeaveListener(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        event.setQuitMessage(StaticCache.prefix + "Der Spieler §e" + player + "§6 hat das Projekt verlassen.");
+        event.setQuitMessage(StaticCache.prefix + "Der Spieler §e" + player.getDisplayName() + "§6 hat das Projekt verlassen.");
     }
 }
