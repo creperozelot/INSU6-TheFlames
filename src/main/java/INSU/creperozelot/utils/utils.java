@@ -20,8 +20,10 @@ public class utils {
         return (int)(Math.random() * range) + min;
     }
 
-    public static void sendActionbar(Player player, String message) {
-        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
+    public static void broadcastActionbar(String message) {
+        for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
+            AllOnlinePlayers.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
+        }
     }
 
 

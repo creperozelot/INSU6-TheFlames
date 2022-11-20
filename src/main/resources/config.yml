@@ -1,8 +1,17 @@
 main:
   prefix: '§e§lIN§6§lSU §f§l6 §r§7|§6 '
+  countdown:
+    minutes: 5
   #DO NOT TOUCH BEGIN-----------------------------------------------------------
   started: false
   #DO NOT TOUCH END-----------------------------------------------------------
+
+story:
+  airplane:
+    start:
+      x: 0
+      y: 0
+      z: 0
 
 dc:
   bot:
