@@ -19,38 +19,34 @@ public class CommandTeamRegister implements CommandExecutor {
                 player.sendMessage(StaticCache.prefix + "§cBenutzung: /registerteam <playername> <teamname> <teamid>");
             } else {
 
-                try {
-                    if (MYSQL.PlayerExist(args[0])) {
+                if (MYSQL.PlayerExist(args[0])) {
 
-                        boolean isint = false;
-                        int id = 0;
-                        try {
-
-
-                            id = Integer.parseInt(args[2]);
-
-                            isint = true;
-                        } catch (NumberFormatException e) {
-                            //throw new RuntimeException(e);
-                        }
-
-                        if (isint) {
-                            try {
-                                MYSQL.setTeam(args[0], args[1], id);
-                                player.sendMessage(StaticCache.prefix + "§aTeam §6" + args[1] + " §awurde mit dem Spieler §6" + args[0] + " §aund der ID §6" + args[2] + " §aerstellt.");
-                            } catch (SQLException e) {
-                                throw new RuntimeException(e);
-                            }
-                        } else {
-                            player.sendMessage(StaticCache.prefix + "§cDie Team-ID ist keine Zahl.");
-                        }
+                    boolean isint = false;
+                    int id = 0;
+                    try {
 
 
-                    } else {
-                        player.sendMessage(StaticCache.prefix + "§cDer Spieler wurde nicht in der Datenbank gefunden!");
+                        id = Integer.parseInt(args[2]);
+
+                        isint = true;
+                    } catch (NumberFormatException e) {
+                        //throw new RuntimeException(e);
                     }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+
+                    if (isint) {
+                        try {
+                            MYSQL.setTeam(args[0], args[1], id);
+                            player.sendMessage(StaticCache.prefix + "§aTeam §6" + args[1] + " §awurde mit dem Spieler §6" + args[0] + " §aund der ID §6" + args[2] + " §aerstellt.");
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    } else {
+                        player.sendMessage(StaticCache.prefix + "§cDie Team-ID ist keine Zahl.");
+                    }
+
+
+                } else {
+                    player.sendMessage(StaticCache.prefix + "§cDer Spieler wurde nicht in der Datenbank gefunden!");
                 }
 
 

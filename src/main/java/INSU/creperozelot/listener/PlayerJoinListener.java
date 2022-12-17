@@ -36,7 +36,7 @@ public class PlayerJoinListener implements Listener {
 
         //MYSQL
         if (!MYSQL.PlayerExist(player.getName())) {
-            MYSQL.update("INSERT INTO `INSU`(`PLAYER`, `DEATH`, `ID`, `TEAM`, `ISGAMEMASTER`) VALUES ('" + player.getName() + "','0','-1','','false');");
+            player.kickPlayer("§c§lFehler: \n §r§cDu bist nicht in der Datenbank eingetragen. \n §cStelle sicher das du dich bei INSU beworben hast und Aktzeptiert wurdest.");
         }
     }
 }

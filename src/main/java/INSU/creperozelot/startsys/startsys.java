@@ -33,7 +33,11 @@ public class startsys {
                 }
 
                 if (countdown_sec == 0) {
-                    startsys.initStory();
+                    try {
+                        startsys.initStory();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                     cancel(); //Funfact bukkit hat eine cancel methode bereits integriert; Einfach cancel(); schreiben in der Bukkit Runnable
                 }
 
@@ -43,7 +47,70 @@ public class startsys {
         }, 0, 20);
     }
 
-    public static void initStory() {
+    public static void Countdown_insustart() throws SQLException {
+        int countdown_s = 30;
+
+        StaticCache.freeze = true;
+        try {
+            List<String> teams = MYSQL.getTeams();
+
+            for (String team : teams){
+
+                List<String> players = MYSQL.getPlayerbyTeam(team);
+
+                int x = utils.random(-750, 750);
+
+                int z = utils.random(-750, 750);
+
+                Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")).loadChunk(x,z);
+
+                int y = Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")).getHighestBlockYAt(x,z);
+
+                Location loc = new Location(Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")) ,x,y,z);
+
+                for (String playername : players){
+
+                    if (Bukkit.getPlayer(playername) != null){
+
+                        Player player = Bukkit.getPlayer(playername);
+
+                        player.teleport(loc);
+
+                    }
+
+                }
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
+            MYSQL.setStarted(AllOnlinePlayers.getName(), "true");
+        }
+
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(main.getInstance(), new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (countdown_s == 0) {
+                    cancel();
+                    StaticCache.freeze = false;
+                    utils.broadcastTitle("§e§lIN§6§lSU", "ist §aGESTARTET!", 10, 80, 20);
+
+                }
+
+                for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
+                    AllOnlinePlayers.sendMessage(StaticCache.prefix + "§a§lStart in §2§l " + countdown_s + "§a§lSekunden!");
+                    AllOnlinePlayers.playSound(AllOnlinePlayers.getLocation(), Sound.BLOCK_NOTE_BELL, 100, 0);
+                }
+
+                utils.broadcastActionbar("§a§lStart in §2§l " + countdown_s + "§a§lSekunden!");
+            }
+        }, 0, 20);
+    }
+
+    public static void initStory() throws SQLException {
         int Airplane_start_x = main.getInstance().getConfig().getInt("story.airplane.start.x");
         int Airplane_start_y = main.getInstance().getConfig().getInt("story.airplane.start.y");
         int Airplane_start_z = main.getInstance().getConfig().getInt("story.airplane.start.z");
@@ -63,6 +130,24 @@ public class startsys {
             AllOnlinePlayers.playSound(AllOnlinePlayers.getLocation(), Sound.ENTITY_GHAST_HURT, 100, 0);
 
         }
+
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), new BukkitRunnable() {
+            @Override
+            public void run() {
+
+                int Airplane_inair_x = main.getInstance().getConfig().getInt("story.airplane.inair.x");
+                int Airplane_inair_y = main.getInstance().getConfig().getInt("story.airplane.inair.y");
+                int Airplane_inair_z = main.getInstance().getConfig().getInt("story.airplane.inair.z");
+
+
+                for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
+                    AllOnlinePlayers.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 10, 250, false, false));
+                    Bukkit.broadcastMessage(StaticCache.prefix + "§2Zwei Stunden später...");
+                    AllOnlinePlayers.teleport(new Location (AllOnlinePlayers.getWorld(), Airplane_inair_x, Airplane_inair_y, Airplane_inair_z));
+                }
+            }
+        }, 20 * 30);
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), new BukkitRunnable() {
             @Override

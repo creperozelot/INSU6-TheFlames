@@ -1,7 +1,13 @@
 package INSU.creperozelot.utils;
 
 import INSU.creperozelot.main;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.*;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,10 +71,26 @@ public class MYSQL {
         }
     }
 
-    public static boolean PlayerExist(String playername) throws SQLException {
+    public static boolean PlayerExist(String playername) {
+
+        try {
+
+
+            con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
+            Statement stmt = con.createStatement();
+            return stmt.executeQuery("SELECT * FROM `INSU` WHERE `PLAYER`='" + playername + "';").next();
+        } catch (SQLException e){
+
+            e.printStackTrace();
+
+        }
+        return false;
+    }
+
+    public static void CreatePlayer(String playername, int DeahtID, String teamname, int ID, String isgamemaster, String started) throws SQLException {
         con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
         Statement stmt = con.createStatement();
-        return stmt.executeQuery("SELECT * FROM `INSU` WHERE `PLAYER`='" + playername + "';").next();
+        stmt.execute("INSERT INTO `INSU` (`PLAYER`, `DEATH`, `ID`, `TEAM`, `ISGAMEMASTER`, `STARTED`) VALUES ('" + playername + "', " + DeahtID + ", " + ID + ", '" + teamname + "', '" + isgamemaster + "', '" + started + "');");
     }
 
     public static void setDeath(String playername, int deathid) throws SQLException {
@@ -111,6 +133,94 @@ public class MYSQL {
         return list;
     }
 
+    public static String export() throws SQLException, IOException {
+        con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
+
+        String excelFilePath = main.getInstance().getDataFolder() + "-exportdata.xlsx";
+
+            String sql = "SELECT * FROM INSU";
+
+            Statement statement = con.createStatement();
+
+            ResultSet result = statement.executeQuery(sql);
+
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet sheet = workbook.createSheet("INSU");
+
+
+
+            writeHeaderLine(sheet);
+
+            writeDataLines(result, workbook, sheet);
+
+            FileOutputStream outputStream = new FileOutputStream(excelFilePath);
+            workbook.write(outputStream);
+            workbook.close();
+
+            statement.close();
+
+            return excelFilePath;
+        }
+
+
+    private static void writeHeaderLine(XSSFSheet sheet) {
+
+        Row headerRow = sheet.createRow(0);
+
+        Cell headerCell = headerRow.createCell(0);
+        headerCell.setCellValue("PLAYER");
+
+        headerCell = headerRow.createCell(1);
+        headerCell.setCellValue("DEATH");
+
+        headerCell = headerRow.createCell(2);
+        headerCell.setCellValue("ID");
+
+        headerCell = headerRow.createCell(3);
+        headerCell.setCellValue("TEAM");
+
+        headerCell = headerRow.createCell(4);
+        headerCell.setCellValue("ISGAMEMASTER");
+
+        headerCell = headerRow.createCell(5);
+        headerCell.setCellValue("STARTED");
+    }
+
+
+    private static void writeDataLines(ResultSet result, XSSFWorkbook workbook,
+                                       XSSFSheet sheet) throws SQLException {
+        int rowCount = 1;
+
+        while (result.next()) {
+            String player = result.getString("PLAYER");
+            String death = result.getString("DEATH");
+            int id = result.getInt("ID");
+            String team = result.getString("TEAM");
+            String isgamemaster = result.getString("ISGAMEMASTER");
+            String started = result.getString("STARTED");
+
+            Row row = sheet.createRow(rowCount++);
+
+            int columnCount = 0;
+            Cell cell = row.createCell(columnCount++);
+            cell.setCellValue(player);
+
+            cell = row.createCell(columnCount++);
+            cell.setCellValue(death);
+
+            cell = row.createCell(columnCount++);
+            cell.setCellValue(id);
+
+            cell = row.createCell(columnCount++);
+            cell.setCellValue(team);
+
+            cell = row.createCell(columnCount++);
+            cell.setCellValue(isgamemaster);
+
+            cell = row.createCell(columnCount++);
+            cell.setCellValue(started);
+        }
+    }
 
     public static List<String> getPlayerbyTeam(String teamname) throws SQLException {
         con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
@@ -214,6 +324,77 @@ public class MYSQL {
 
         }
         return i;
+    }
+
+    public static boolean TeamExist(String teamname) throws SQLException {
+        con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
+        Statement stmt = con.createStatement();
+        return stmt.executeQuery("SELECT * FROM `INSU` WHERE `TEAM`='" + teamname + "';").next();
+    }
+
+
+    public static boolean isStarted(String playername) throws SQLException {
+
+        boolean i = false;
+
+        if (con.createStatement().executeQuery("SELECT STARTED FROM `INSU` WHERE PLAYER='" + playername + "';").next()) {
+
+            Statement stmt = con.createStatement();
+            ResultSet result = stmt.executeQuery("SELECT STARTED FROM `INSU` WHERE PLAYER='" + playername + "';");
+            result.first();
+            i = result.getBoolean("STARTED");
+
+        }
+        return i;
+    }
+
+    public static void setStarted(String playername, String bool) throws SQLException {
+        con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
+        Statement stmt = con.createStatement();
+        stmt.execute("UPDATE `INSU` SET `STARTED`='" + bool + "' WHERE `PLAYER`='" + playername + "';");
+    }
+
+    public static boolean PlayerHasTeamMate(String playername) throws SQLException {
+        con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
+        Statement stmt = con.createStatement();
+        String id = MYSQL.getIDbyName(playername);
+        boolean bo = false;
+        List<String> list = new ArrayList<>();
+
+        if (stmt.executeQuery("SELECT ID FROM `INSU`").next()) {
+
+            ResultSet result = stmt.executeQuery("SELECT ID FROM `INSU`");
+
+            result.first();
+
+            while (!result.isAfterLast()) {
+
+                String team = result.getString(MYSQL.getIDbyName(playername));
+
+                list.add(team);
+
+                result.next();
+
+
+
+                switch (list.size()) {
+                    case 0:
+                        bo = false;
+                        break;
+                    case 1:
+                        bo = false;
+                        break;
+                    case 2:
+                        bo = true;
+                        break;
+                    default:
+                        bo = false;
+                        break;
+                }
+
+            }
+        }
+        return bo;
     }
 
 

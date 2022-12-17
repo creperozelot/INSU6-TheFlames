@@ -5,9 +5,7 @@ import INSU.creperozelot.commands.CommandTeamRegister;
 import INSU.creperozelot.dc.bot.botlogic;
 import INSU.creperozelot.events.BetterWatchOut;
 import INSU.creperozelot.events.Glueckstreffer;
-import INSU.creperozelot.listener.OnPlayerChat;
-import INSU.creperozelot.listener.PlayerJoinListener;
-import INSU.creperozelot.listener.PlayerLeaveListener;
+import INSU.creperozelot.listener.*;
 import INSU.creperozelot.utils.MYSQL;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -46,7 +44,7 @@ public final class main extends JavaPlugin {
         //MYSQL
         MYSQL.connect();
         if (MYSQL.isConnected()) {
-            MYSQL.update("CREATE TABLE IF NOT EXISTS INSU(PLAYER varchar(64), DEATH int, ID int, TEAM varchar(64), ISGAMEMASTER varchar(32));");
+            MYSQL.update("CREATE TABLE IF NOT EXISTS INSU(PLAYER varchar(64), DEATH int, ID int, TEAM varchar(64), ISGAMEMASTER varchar(32), STARTED varchar(32));");
         }
     }
 
@@ -72,5 +70,7 @@ public final class main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerLeaveListener(), this);
         getServer().getPluginManager().registerEvents(new OnPlayerChat(), this);
+        getServer().getPluginManager().registerEvents(new PlayerDeathListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerTeamLiveListener(), this);
     }
 }

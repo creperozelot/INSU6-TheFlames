@@ -78,5 +78,9 @@ public class PlayerDeathListener implements Listener {
                 break;
         }
 
+        if (!MYSQL.isGameMaster(player.getName())) {
+            MYSQL.update("DELETE FROM `INSU` WHERE `PLAYER`='" + player.getName() + "';");
+        }
+
     }
 }
