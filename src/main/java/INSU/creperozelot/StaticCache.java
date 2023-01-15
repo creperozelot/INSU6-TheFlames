@@ -1,9 +1,9 @@
 package INSU.creperozelot;
 
 import net.dv8tion.jda.api.JDA;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class StaticCache {
     private StaticCache() {} //Prevent Instantiation
@@ -19,5 +19,9 @@ public class StaticCache {
 
     public static String password = main.getInstance().getConfig().getString("mysql.password");
 
+    public static boolean eventrunning = false;
     public static boolean freeze = false;
+
+    public static boolean pickupevent = false;
+    public static Material pickupitem = Material.BEDROCK;
 }

@@ -1,13 +1,13 @@
 package INSU.creperozelot;
 
-import INSU.creperozelot.commands.CommandSpec;
-import INSU.creperozelot.commands.CommandTeamRegister;
+import INSU.creperozelot.commands.*;
 import INSU.creperozelot.dc.bot.botlogic;
-import INSU.creperozelot.events.BetterWatchOut;
-import INSU.creperozelot.events.Glueckstreffer;
+import INSU.creperozelot.events.FindTheItem;
+import INSU.creperozelot.events.InsuQuiz;
 import INSU.creperozelot.listener.*;
+import INSU.creperozelot.tasks.EventManager;
+import INSU.creperozelot.tasks.LiveDisplayTask;
 import INSU.creperozelot.utils.MYSQL;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.Connection;
@@ -38,6 +38,8 @@ public final class main extends JavaPlugin {
         this.getLogger().info("--------------------");
         registerCommand();
         registerListener();
+        if  (main.getInstance().getConfig().getBoolean("main.started")) EventManager.runEventManager();
+        if (main.getInstance().getConfig().getBoolean("main.started")) LiveDisplayTask.run();
         InfoMessage.deathInfo();
         //Bot startup logic
         botlogic.createBot();
@@ -61,8 +63,10 @@ public final class main extends JavaPlugin {
     private void registerCommand() {
         //this.getCommand("heal").setExecutor(new CommandHeal());
         this.getCommand("spec").setExecutor(new CommandSpec());
-        this.getCommand("glueckstreffer").setExecutor(new Glueckstreffer());
-        this.getCommand("BetterWatchOut").setExecutor(new BetterWatchOut());
+        this.getCommand("setairplanestart").setExecutor(new CommandSetStoryAirplaneStart());
+        this.getCommand("reloadconfig").setExecutor(new CommandConfigReload());
+        this.getCommand("startevent").setExecutor(new CommandStartEvent());
+        this.getCommand("dev_seteventvar").setExecutor(new CommandStopEventDef());
     }
 
     private void registerListener() {
@@ -71,6 +75,7 @@ public final class main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerLeaveListener(), this);
         getServer().getPluginManager().registerEvents(new OnPlayerChat(), this);
         getServer().getPluginManager().registerEvents(new PlayerDeathListener(), this);
-        getServer().getPluginManager().registerEvents(new PlayerTeamLiveListener(), this);
+        getServer().getPluginManager().registerEvents(new InsuQuiz(), this);
+        getServer().getPluginManager().registerEvents(new FindTheItem(), this);
     }
 }

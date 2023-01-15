@@ -13,6 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.sql.SQLException;
 
+
 public class PlayerJoinListener implements Listener {
     @EventHandler
     public void onPLayerJoin(PlayerJoinEvent event) throws SQLException {
@@ -27,6 +28,9 @@ public class PlayerJoinListener implements Listener {
         player.sendMessage(StaticCache.prefix + "§aDu bist im Team §6" + MYSQL.getTeambyName(player.getName()));
 
         //players stuff
+        Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "title " + player.getName() + " timings 10 60 10");
+
+
         if (MYSQL.isGameMaster(player.getName())) {
             player.setDisplayName("§e§lGamemaster §r§8|§r§f " + player.getName());
         } else {

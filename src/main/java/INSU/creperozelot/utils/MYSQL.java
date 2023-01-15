@@ -76,7 +76,6 @@ public class MYSQL {
         try {
 
 
-            con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
             Statement stmt = con.createStatement();
             return stmt.executeQuery("SELECT * FROM `INSU` WHERE `PLAYER`='" + playername + "';").next();
         } catch (SQLException e){
@@ -88,26 +87,23 @@ public class MYSQL {
     }
 
     public static void CreatePlayer(String playername, int DeahtID, String teamname, int ID, String isgamemaster, String started) throws SQLException {
-        con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
         Statement stmt = con.createStatement();
         stmt.execute("INSERT INTO `INSU` (`PLAYER`, `DEATH`, `ID`, `TEAM`, `ISGAMEMASTER`, `STARTED`) VALUES ('" + playername + "', " + DeahtID + ", " + ID + ", '" + teamname + "', '" + isgamemaster + "', '" + started + "');");
     }
 
     public static void setDeath(String playername, int deathid) throws SQLException {
-        con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
         Statement stmt = con.createStatement();
         stmt.execute("UPDATE `INSU` SET `DEATH`='" + deathid + "' WHERE `PLAYER`='" + playername + "';");
     }
 
     public static void setTeam(String playername, String teamname, int teamid) throws SQLException {
-        con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
         Statement stmt = con.createStatement();
         stmt.execute("UPDATE `INSU` SET `TEAM`='" + teamname + "' WHERE `PLAYER`='" + playername + "';");
         stmt.execute("UPDATE `INSU` SET `ID`='" + teamid + "' WHERE `PLAYER`='" + playername + "';");
     }
 
     public static List<String> getTeams() throws SQLException {
-        con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
+
         Statement stmt = con.createStatement();
 
         List<String> list = new ArrayList<>();
@@ -129,12 +125,10 @@ public class MYSQL {
             }
         }
 
-
         return list;
     }
 
     public static String export() throws SQLException, IOException {
-        con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
 
         String excelFilePath = main.getInstance().getDataFolder() + "-exportdata.xlsx";
 
@@ -148,7 +142,6 @@ public class MYSQL {
             XSSFSheet sheet = workbook.createSheet("INSU");
 
 
-
             writeHeaderLine(sheet);
 
             writeDataLines(result, workbook, sheet);
@@ -158,6 +151,7 @@ public class MYSQL {
             workbook.close();
 
             statement.close();
+
 
             return excelFilePath;
         }
@@ -172,7 +166,6 @@ public class MYSQL {
 
         headerCell = headerRow.createCell(1);
         headerCell.setCellValue("DEATH");
-
         headerCell = headerRow.createCell(2);
         headerCell.setCellValue("ID");
 
@@ -184,6 +177,7 @@ public class MYSQL {
 
         headerCell = headerRow.createCell(5);
         headerCell.setCellValue("STARTED");
+
     }
 
 
@@ -201,12 +195,16 @@ public class MYSQL {
 
             Row row = sheet.createRow(rowCount++);
 
+
+
             int columnCount = 0;
+
             Cell cell = row.createCell(columnCount++);
             cell.setCellValue(player);
 
             cell = row.createCell(columnCount++);
             cell.setCellValue(death);
+
 
             cell = row.createCell(columnCount++);
             cell.setCellValue(id);
@@ -219,11 +217,18 @@ public class MYSQL {
 
             cell = row.createCell(columnCount++);
             cell.setCellValue(started);
+
+            CellStyle style = cell.getCellStyle();
+            style.setWrapText(true);
+            cell.setCellStyle(style);
+
+
+
         }
     }
 
     public static List<String> getPlayerbyTeam(String teamname) throws SQLException {
-        con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
+        
         Statement stmt = con.createStatement();
 
         ResultSet result = stmt.executeQuery("SELECT * FROM `INSU` WHERE `TEAM`='" + teamname + "';");
@@ -327,7 +332,6 @@ public class MYSQL {
     }
 
     public static boolean TeamExist(String teamname) throws SQLException {
-        con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
         Statement stmt = con.createStatement();
         return stmt.executeQuery("SELECT * FROM `INSU` WHERE `TEAM`='" + teamname + "';").next();
     }
@@ -349,29 +353,27 @@ public class MYSQL {
     }
 
     public static void setStarted(String playername, String bool) throws SQLException {
-        con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
         Statement stmt = con.createStatement();
         stmt.execute("UPDATE `INSU` SET `STARTED`='" + bool + "' WHERE `PLAYER`='" + playername + "';");
     }
 
     public static boolean PlayerHasTeamMate(String playername) throws SQLException {
-        con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
         Statement stmt = con.createStatement();
         String id = MYSQL.getIDbyName(playername);
         boolean bo = false;
         List<String> list = new ArrayList<>();
 
-        if (stmt.executeQuery("SELECT ID FROM `INSU`").next()) {
+        if (stmt.executeQuery("SELECT * FROM `INSU`").next()) {
 
-            ResultSet result = stmt.executeQuery("SELECT ID FROM `INSU`");
+            ResultSet result = stmt.executeQuery("SELECT ID FROM `INSU` WHERE `ID`='" + id + "';");
 
             result.first();
 
             while (!result.isAfterLast()) {
 
-                String team = result.getString(MYSQL.getIDbyName(playername));
 
-                list.add(team);
+                list.add(result.toString());
+
 
                 result.next();
 

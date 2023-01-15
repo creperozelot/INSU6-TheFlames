@@ -18,9 +18,11 @@ public class PlayerTeamLiveListener implements Listener {
         Player player = event.getPlayer();
 
         if (main.getInstance().getConfig().getBoolean("main.started")) {
+            System.out.println("test 1 success");
 
         //If Teamplayer death...
             if (MYSQL.PlayerHasTeamMate(player.getName())) {
+                System.out.println("test 2 success");
                 List<String> teammatename = MYSQL.getPlayerbyTeam(MYSQL.getTeambyName(player.getName()));
                 teammatename.remove(player.getName());
                 Player teammate = Bukkit.getPlayer(teammatename.toString().replace("[", "").replace("]", ""));
@@ -28,6 +30,7 @@ public class PlayerTeamLiveListener implements Listener {
 
                 utils.sendActionbar(player, "§c§lDein Partner hat noch " + teammate.getHealth() + "§c§l Leben...");
             }
+            System.out.println("test 3 success");
             utils.sendActionbar(player, "§e§lDu hast keinen Partner oder er ist Gestorben...");
 
         }

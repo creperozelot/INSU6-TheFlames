@@ -26,6 +26,6 @@ public class OnPlayerChat implements Listener {
 
         botlogic.sendEmbedMessage(eb.build(), "1040334586397347870");
 
-        event.setMessage("§e" + player.getName() + " §7|§6 " + event.getMessage());
+        event.setFormat("§e" + player.getName() + " §7|§6 " + event.getMessage());
     }
 }

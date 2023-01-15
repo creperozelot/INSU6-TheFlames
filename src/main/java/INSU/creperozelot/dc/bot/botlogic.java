@@ -1,6 +1,7 @@
 package INSU.creperozelot.dc.bot;
 
 import INSU.creperozelot.StaticCache;
+import INSU.creperozelot.dc.bot.events.Autocomplete;
 import INSU.creperozelot.dc.bot.events.SlashCommandEvent;
 import INSU.creperozelot.main;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -26,6 +27,7 @@ public class botlogic {
         builder.setStatus(OnlineStatus.ONLINE);
         builder.setActivity(Activity.playing("Insu Staffel 6"));
         builder.addEventListeners(new SlashCommandEvent());
+        builder.addEventListeners(new Autocomplete());
         StaticCache.jda = builder.build();
 
         StaticCache.jda.updateCommands().addCommands(
@@ -42,7 +44,14 @@ public class botlogic {
                         .addOption(OptionType.STRING, "teamname", "Der Team Name", true)
                         .addOption(OptionType.INTEGER, "id", "ID des Teams (MUSS FÜR TEAM EINDEUTIG SEIN)", true),
 
-                Commands.slash("list", "Listet alles auf")
+                Commands.slash("list", "Listet alles auf"),
+
+                Commands.slash("apply", "Ändert den Bewerbungs Status")
+                        .addOption(OptionType.STRING, "apply-type", "Schreibe accept oder decline", true, true)
+                        .addOption(OptionType.USER, "dcname", "Gebe hier den DC user an der die Bewerben gesendet hat.", true)
+                        .addOption(OptionType.STRING, "sender", "Gebe hier den MC namen des Absenders ein", true)
+                        .addOption(OptionType.STRING, "partner", "Gebe hier denn MC Teammate namen ein", true)
+                        .addOption(OptionType.STRING, "reason", "Gebe hier den Grund ein der zur Ablehnung oder Anahme führt", true, true)
 
         ).queue();
 

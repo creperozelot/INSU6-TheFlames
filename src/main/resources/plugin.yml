@@ -19,3 +19,19 @@ commands:
     description: Start das Event BetterWatchOut.
     permission: insu.admin.event.BetterWatchOut
     permission-message: §cDu hast keine Berechtigung dafür!
+  setairplanestart:
+    description: Setze die Startkoordinaten von der Story (Flugzeug Boden)
+    permission: insu.admin.story.airplane.start
+    permission-message: §cDu hast keine Berechtigung dafür!
+  reloadconfig:
+    description: Lädt die Config neu
+    permission: insu.admin.reloadconfig
+    permission-message: §cDu hast keine Berechtigung dafür!
+  startevent:
+    description: Startet ein Event
+    permission: insu.admin.eventstart
+    permission-message: §cDu hast keine Berechtigung dafür!
+  dev_seteventvar:
+    description: Setzt die Event variable
+    permission: insu.dev.var
+    permission-message: §cDu hast keine Berechtigung dafür!

@@ -26,7 +26,7 @@ public class DeleteTeamCommand {
         if (list.contains(team)){
 
             try {
-                MYSQL.con.createStatement().execute("DELETE `INSU` WHERE `TEAM`='" + team + "';");
+                MYSQL.con.createStatement().execute("DELETE FROM `INSU` WHERE `TEAM`='" + team + "';");
 
                 EmbedBuilder eb = new EmbedBuilder();
 

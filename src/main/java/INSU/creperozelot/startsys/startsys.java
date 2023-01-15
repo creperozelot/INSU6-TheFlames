@@ -2,6 +2,7 @@ package INSU.creperozelot.startsys;
 
 import INSU.creperozelot.StaticCache;
 import INSU.creperozelot.main;
+import INSU.creperozelot.utils.MYSQL;
 import INSU.creperozelot.utils.utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -11,6 +12,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -127,7 +131,7 @@ public class startsys {
 
             //Start Story
 
-            AllOnlinePlayers.playSound(AllOnlinePlayers.getLocation(), Sound.ENTITY_GHAST_HURT, 100, 0);
+            AllOnlinePlayers.playSound(AllOnlinePlayers.getLocation(), Sound.ENTITY_GHAST_DEATH, 100, 0);
 
         }
 
@@ -152,9 +156,24 @@ public class startsys {
         Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), new BukkitRunnable() {
             @Override
             public void run() {
+                for (Player OnlinePlayer : Bukkit.getOnlinePlayers()){
+                    OnlinePlayer.playSound(OnlinePlayer.getLocation(), Sound.ENTITY_BLAZE_DEATH, 100, 0);
+                }
+            }
+        },200);
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), new BukkitRunnable() {
+            @Override
+            public void run() {
+
+                for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
+                    AllOnlinePlayers.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 10, 250, false, false));
+                }
 
             }
-        });
+        }, 110 * 20);
+
+        startsys.Countdown_insustart();
 
 
     }

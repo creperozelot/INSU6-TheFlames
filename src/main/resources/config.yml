@@ -7,6 +7,17 @@ main:
   started: false
   #DO NOT TOUCH END-----------------------------------------------------------
 
+#schema: question;answer
+questions:
+  - Wer hat INSU 1 Gewonnen?;Raichu
+  - Wer ist der Gründer von INSU (Nur einer ist Richtig (Inagemname)?;ToadenationNr1
+  - Wie heißt Obama mit ganzem Namen?;Barack Hussein Obama
+  - Wie alt ist die Queen zirka geworden?; 96
+  - Wie heißt ein helles Mammut?;Hellmut
+  - was macht man mit einem Hund ohne Beine?;Um die Häuser ziehen
+  - Wo kauft man 53 Melonen?;Im Mathebuch
+  - Wann gehen U-Boote unter?;Tag der offenen Türe
+
 story:
   airplane:
     start:

@@ -1,5 +1,6 @@
 package INSU.creperozelot.dc.bot.events;
 
+import INSU.creperozelot.commands.CommandApply;
 import INSU.creperozelot.commands.CommandTeamRegister;
 import INSU.creperozelot.dc.bot.cmd.*;
 import INSU.creperozelot.main;
@@ -12,11 +13,13 @@ import java.sql.SQLException;
 public class SlashCommandEvent extends ListenerAdapter {
 
     @Override
-    public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
+    public void onSlashCommandInteraction(SlashCommandInteractionEvent event) throws RuntimeException {
 
-        //main.getInstance().getLogger().info("System Geht");
+        if (!event.getUser().isBot()) {
 
-        switch (event.getName()){
+            //main.getInstance().getLogger().info("System Geht");
+
+            switch (event.getName()) {
 
                 case "delteam":
                     new DeleteTeamCommand(event.getOption("team").getAsString(), event);
@@ -38,7 +41,11 @@ public class SlashCommandEvent extends ListenerAdapter {
                         throw new RuntimeException(e);
                     }
                     break;
+                case "apply":
+                    new CommandApply(event.getOption("apply-type").getAsString(), event.getOption("dcname").getAsUser(), event.getOption("sender").getAsString(), event.getOption("partner").getAsString(), event.getOption("reason").getAsString(), event);
+                    break;
             }
 
+        }
     }
 }
