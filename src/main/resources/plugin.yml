@@ -35,3 +35,8 @@ commands:
     description: Setzt die Event variable
     permission: insu.dev.var
     permission-message: §cDu hast keine Berechtigung dafür!
+  setairplaneair:
+    description: Setze die Startkoordinaten von der Story (Flugzeug Air)
+    permission: insu.admin.story.airplane.air
+    permission-message: §cDu hast keine Berechtigung dafür!
+

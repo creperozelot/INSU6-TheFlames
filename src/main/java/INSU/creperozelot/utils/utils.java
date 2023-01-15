@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -43,12 +44,14 @@ public class utils {
     }
 
     public static Player randomOnlinePlayer() {
-        List<String> players = Collections.singletonList(Arrays.toString(Bukkit.getOnlinePlayers().toArray()));
+        ArrayList<String> players = new ArrayList<>();
+        for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
+            players.add(AllOnlinePlayers.getName());
+        }
 
-        int randomplayerint = utils.random(0, players.size());
-        String playerstring = players.get(randomplayerint);
+        int randomaplyer = utils.random(0, players.size());
 
-        return Bukkit.getPlayer(playerstring);
+        return Bukkit.getPlayer(players.get(randomaplyer));
     }
 
     public static void eventanimation(String eventname, String eventname1, String eventname2, String eventname3, String eventname4, String eventname5, String eventname6) {

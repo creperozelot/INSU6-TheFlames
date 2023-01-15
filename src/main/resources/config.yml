@@ -7,6 +7,37 @@ main:
   started: false
   #DO NOT TOUCH END-----------------------------------------------------------
 
+messages:
+  death:
+    entity_attack: '{Player} ist an {entity} gestorben.'
+    fall: '{Player} ist an Fall Damage gestorben.'
+    lava: '{Player} ist in Lava gestorben.'
+    void: '{Player} ist im Void gestorben.'
+    magic: '{Player} ist an Magie gestorben'
+    poison: '{Player} ist an gift gestorben!'
+    thorns: '{Player} ist an dornen gestorben!'
+    wither: '{Player} ist an einem Wither gestorben.'
+    melting: '{Player} ist geschmoltzen'
+    contact: '{Player} Ist an einem Kakuts oder so Gestorben.'
+    suicide: '{Player} hat sich selbst umgebracht.'
+    cramming: '{Player} ist an keine ahnung gestorben.'
+    drowning: '{Player} ist ertrunken!'
+    lightning: '{Player} wurde von einem Blitz getroffen!'
+    projectile: '{Player} wurde von {entity} zerschoßen!'
+    starvation: '{Player} ist an keine ahnung gestorben!'
+    suffocation: '{Player ist in einem Block erstickt!}'
+    entity_explosion: '{Player} wurde von {entity} in die Luft gesprengt!'
+    entity_sweep_attack: '{Player} wurde von {entity} weg geschnetzelt'
+    fire: '{Player} verbrennt gerade'
+    fire_tick: '{Player} verbrennt gerade'
+    custom: '{Player} ist an was unbekanntem gestorben!'
+    hot_floor: '{Player} hat sich den Arsch verbrannt!'
+    deagon_breath: '{Player} wurde vom Drachenatem gekillt!'
+    falling_block: '{Player} wurde von einem Fallenden Block zerquetscht'
+    fly_into_wall: '{Player} hat die Wand nicht gesehen!'
+    block_explosion: '{Player} wurde von einem Explodierenden block getroffen!'
+    others: 'Die Todesursache von {Player} ist nicht bekannt!'
+
 #schema: question;answer
 questions:
   - Wer hat INSU 1 Gewonnen?;Raichu

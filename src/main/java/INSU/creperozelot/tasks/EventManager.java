@@ -52,6 +52,6 @@ public class EventManager {
 
                 }
             }
-        }, 20 * 60, 0);
+        }, 20 * 60, 1);
     }
 }

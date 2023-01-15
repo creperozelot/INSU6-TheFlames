@@ -67,6 +67,7 @@ public final class main extends JavaPlugin {
         this.getCommand("reloadconfig").setExecutor(new CommandConfigReload());
         this.getCommand("startevent").setExecutor(new CommandStartEvent());
         this.getCommand("dev_seteventvar").setExecutor(new CommandStopEventDef());
+        this.getCommand("setairplaneair").setExecutor(new CommandSetStoryAirplaneAIr());
     }
 
     private void registerListener() {
