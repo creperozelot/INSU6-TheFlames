@@ -49,6 +49,7 @@ public class botlogic {
                 Commands.slash("apply", "Ändert den Bewerbungs Status")
                         .addOption(OptionType.STRING, "apply-type", "Schreibe accept oder decline", true, true)
                         .addOption(OptionType.USER, "dcname", "Gebe hier den DC user an der die Bewerben gesendet hat.", true)
+                        .addOption(OptionType.USER, "dcnamepartner", "Gebe hier den DC user von dem Partner an.", true)
                         .addOption(OptionType.STRING, "sender", "Gebe hier den MC namen des Absenders ein", true)
                         .addOption(OptionType.STRING, "partner", "Gebe hier denn MC Teammate namen ein", true)
                         .addOption(OptionType.STRING, "reason", "Gebe hier den Grund ein der zur Ablehnung oder Anahme führt", true, true)

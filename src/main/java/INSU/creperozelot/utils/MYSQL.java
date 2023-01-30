@@ -39,8 +39,22 @@ public class MYSQL {
     public static void disconnect() {
         if (isConnected())
             try {
+                if (MYSQL.isConnected()) {
+                    con.close();
+                    System.out.println("| [INSU] MYSQL Verbindung wurde getrennt.");
+                } else {
+                    System.out.println("| [INSU] MYSQL Verbindung kann nicht getrent werden, da keine Verbindung besteht!.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+    }
+
+    public static void forcedisconnect() {
+        if (isConnected())
+            try {
                 con.close();
-                System.out.println("| [INSU] MYSQL Verbindung wurde getrennt.                 |");
+                System.out.println("| [INSU] MYSQL Verbindung wurde getrennt. (force)");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -60,6 +74,19 @@ public class MYSQL {
             e.printStackTrace();
         }
     }
+
+    public static boolean arePlayersinTeams(String player1, String player2) throws SQLException {
+        boolean bol = false;
+
+        List<String> teamplayers =  MYSQL.getPlayerbyTeam(MYSQL.getTeambyName(player1));
+
+        if (teamplayers.contains(player2)) {
+            bol = true;
+        }
+
+        return bol;
+    }
+
 
     public static ResultSet getResult(String qry) {
         try {
@@ -84,6 +111,18 @@ public class MYSQL {
 
         }
         return false;
+    }
+
+    public static int getHighestID() {
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet result = stmt.executeQuery("SELECT * FROM INSU ORDER BY ID DESC LIMIT 1");
+            result.first();
+            return result.getInt("ID");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -404;
+        }
     }
 
     public static void CreatePlayer(String playername, int DeahtID, String teamname, int ID, String isgamemaster, String started) throws SQLException {

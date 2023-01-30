@@ -75,7 +75,7 @@ public class InfoMessage {
                             eb.setColor(Color.ORANGE);
                             eb.addField("Spieler:", playerlist, false);
 
-                            botlogic.sendEmbedMessage(eb.build(), "1040334586397347870");
+                            botlogic.sendEmbedMessage(eb.build(), "984755892794843206");
 
                         } else {
 
@@ -86,7 +86,7 @@ public class InfoMessage {
                             eb.setColor(Color.ORANGE);
                             eb.addField("Spieler:", "Keiner ist gestorben!", false);
 
-                            botlogic.sendEmbedMessage(eb.build(), "1040334586397347870");
+                            botlogic.sendEmbedMessage(eb.build(), "984755892794843206");
 
                         }
 

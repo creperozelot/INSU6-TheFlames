@@ -20,11 +20,16 @@ public class OnPlayerChat implements Listener {
         EmbedBuilder eb = new EmbedBuilder();
 
         eb.setTimestamp(LocalDateTime.now());
-        eb.addField("", message, false);
+        eb.setDescription(message);
         eb.setColor(Color.ORANGE);
 
+        if  (StaticCache.muted_players.contains(player.getName())) {
+            event.setCancelled(true);
+            player.sendMessage(StaticCache.prefix + "§cDu bist gemuted und die Nachricht wurde nicht versendet.");
+        }
 
-        botlogic.sendEmbedMessage(eb.build(), "1040334586397347870");
+
+        botlogic.sendEmbedMessage(eb.build(), "732648259599728661");
 
         event.setFormat("§e" + player.getName() + " §7|§6 " + event.getMessage());
     }

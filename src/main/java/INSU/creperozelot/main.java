@@ -7,6 +7,8 @@ import INSU.creperozelot.events.InsuQuiz;
 import INSU.creperozelot.listener.*;
 import INSU.creperozelot.tasks.EventManager;
 import INSU.creperozelot.tasks.LiveDisplayTask;
+import INSU.creperozelot.tasks.MYSQLreconnector;
+import INSU.creperozelot.tasks.WaitingForHost;
 import INSU.creperozelot.utils.MYSQL;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -44,10 +46,9 @@ public final class main extends JavaPlugin {
         //Bot startup logic
         botlogic.createBot();
         //MYSQL
-        MYSQL.connect();
-        if (MYSQL.isConnected()) {
-            MYSQL.update("CREATE TABLE IF NOT EXISTS INSU(PLAYER varchar(64), DEATH int, ID int, TEAM varchar(64), ISGAMEMASTER varchar(32), STARTED varchar(32));");
-        }
+        MYSQLreconnector.run();
+
+        StaticCache.Task_WaitingforHost_id = WaitingForHost.run();
     }
 
     @Override
@@ -68,6 +69,9 @@ public final class main extends JavaPlugin {
         this.getCommand("startevent").setExecutor(new CommandStartEvent());
         this.getCommand("dev_seteventvar").setExecutor(new CommandStopEventDef());
         this.getCommand("setairplaneair").setExecutor(new CommandSetStoryAirplaneAIr());
+        this.getCommand("start").setExecutor(new CommandStart());
+        this.getCommand("mute").setExecutor(new CommandMute());
+        this.getCommand("unmute").setExecutor(new CommandUnmute());
     }
 
     private void registerListener() {
@@ -78,5 +82,8 @@ public final class main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerDeathListener(), this);
         getServer().getPluginManager().registerEvents(new InsuQuiz(), this);
         getServer().getPluginManager().registerEvents(new FindTheItem(), this);
+        getServer().getPluginManager().registerEvents(new onCraftItemListener(), this);
+        getServer().getPluginManager().registerEvents(new ItemPickupListener(), this);
+        getServer().getPluginManager().registerEvents(new FriendlyFire(), this);
     }
 }

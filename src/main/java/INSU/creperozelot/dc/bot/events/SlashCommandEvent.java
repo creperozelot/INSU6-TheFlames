@@ -1,9 +1,7 @@
 package INSU.creperozelot.dc.bot.events;
 
-import INSU.creperozelot.commands.CommandApply;
-import INSU.creperozelot.commands.CommandTeamRegister;
+import INSU.creperozelot.dc.bot.cmd.CommandApply;
 import INSU.creperozelot.dc.bot.cmd.*;
-import INSU.creperozelot.main;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -29,7 +27,7 @@ public class SlashCommandEvent extends ListenerAdapter {
                     break;
                 case "teamcreate":
                     try {
-                        new CommandTest(event.getOption("spieler").getAsString(), event.getOption("teammate").getAsString(), event.getOption("teamname").getAsString(), event.getOption("id").getAsInt(), event);
+                        new CreateTeamCommand(event.getOption("spieler").getAsString(), event.getOption("teammate").getAsString(), event.getOption("teamname").getAsString(), event.getOption("id").getAsInt(), event);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -42,7 +40,7 @@ public class SlashCommandEvent extends ListenerAdapter {
                     }
                     break;
                 case "apply":
-                    new CommandApply(event.getOption("apply-type").getAsString(), event.getOption("dcname").getAsUser(), event.getOption("sender").getAsString(), event.getOption("partner").getAsString(), event.getOption("reason").getAsString(), event);
+                    new CommandApply(event.getOption("apply-type").getAsString(), event.getOption("dcname").getAsUser(),event.getOption("dcnamepartner").getAsUser(), event.getOption("sender").getAsString(), event.getOption("partner").getAsString(), event.getOption("reason").getAsString(), event);
                     break;
             }
 

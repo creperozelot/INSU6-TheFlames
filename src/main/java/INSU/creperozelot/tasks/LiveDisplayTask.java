@@ -34,34 +34,5 @@ public class LiveDisplayTask {
                     }
                 }, 20, 20);
 
-
-                /**
-                 * @Override
-                 *             public void run() {
-                 *                 for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
-                 *                     try {
-                 *                         if (MYSQL.PlayerHasTeamMate(AllOnlinePlayers.getName())) {
-                 *                             System.out.println("test 2 success");
-                 *                             List<String> teammatename = null;
-                 *                             try {
-                 *                                 teammatename = MYSQL.getPlayerbyTeam(MYSQL.getTeambyName(AllOnlinePlayers.getName()));
-                 *                             } catch (SQLException e) {
-                 *                                 throw new RuntimeException(e);
-                 *                             }
-                 *                             teammatename.remove(AllOnlinePlayers.getName());
-                 *                             Player teammate = Bukkit.getPlayer(teammatename.toString().replace("[", "").replace("]", ""));
-                 *
-                 *
-                 *                             utils.sendActionbar(AllOnlinePlayers, "§c§lDein Partner hat noch " + teammate.getHealth() + "§c§l Leben...");
-                 *                         }
-                 *                         System.out.println("test 3 success");
-                 *                         utils.sendActionbar(AllOnlinePlayers, "§e§lDu hast keinen Partner oder er ist Gestorben...");
-                 *
-                 *                     } catch (SQLException e) {
-                 *                         System.out.println(e);
-                 *                     }
-                 *                 }
-                 *             }
-                 */
     }
 }

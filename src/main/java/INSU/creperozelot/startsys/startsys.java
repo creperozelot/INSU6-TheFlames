@@ -20,35 +20,48 @@ import java.util.concurrent.TimeUnit;
 
 public class startsys {
     static int countdown_sec = 60 * main.getInstance().getConfig().getInt("main.countdown.minutes");
+
+    static int countdown_min = main.getInstance().getConfig().getInt("main.countdown.minutes");
     public static void countdown(int CountdownMinutes) {
 
-        int countdown_current_min = (int) TimeUnit.SECONDS.toMinutes(countdown_sec);
-         Bukkit.getScheduler().scheduleSyncRepeatingTask(main.getInstance(), new BukkitRunnable() {
+
+
+        new BukkitRunnable() {
             @Override
             public void run() {
-                utils.broadcastActionbar("§e§lIN§6§lSU§r§a§l Startet in §2§l" + countdown_sec + "§a§l Sekunden...");
 
-                if (countdown_sec == 300 || countdown_sec == 240 || countdown_sec == 180 || countdown_sec == 120 || countdown_sec == 60) {
-                    Bukkit.broadcastMessage(StaticCache.prefix + "Start in §f" + countdown_current_min + "§6 Minuten...");
-                }
+                if  (countdown_min == 0) cancel();
 
-                if ( countdown_sec == 30 || countdown_sec == 20 || countdown_sec <= 10) {
-                    Bukkit.broadcastMessage(StaticCache.prefix + "Start in §f" + countdown_sec + "§6 Sekunden...");
-                }
-
-                if (countdown_sec == 0) {
-                    try {
-                        startsys.initStory();
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                    cancel(); //Funfact bukkit hat eine cancel methode bereits integriert; Einfach cancel(); schreiben in der Bukkit Runnable
-                }
-
-                countdown_sec--;
-
+                countdown_min--;
             }
-        }, 0, 20);
+        }.runTaskTimer(main.getInstance(), 0, 20 * 59);
+
+         new BukkitRunnable() {
+             @Override
+             public void run() {
+                 utils.broadcastActionbar("§e§lIN§6§lSU§r§a§l Startet in §2§l" + countdown_sec + "§a§l Sekunden...");
+
+                 if (countdown_sec == 300 || countdown_sec == 240 || countdown_sec == 180 || countdown_sec == 120 || countdown_sec == 60) {
+                     Bukkit.broadcastMessage(StaticCache.prefix + "Start in §f" + countdown_min + "§6 Minuten...");
+                 }
+
+                 if ( countdown_sec == 30 || countdown_sec == 20 || countdown_sec <= 10) {
+                     Bukkit.broadcastMessage(StaticCache.prefix + "Start in §f" + countdown_sec + "§6 Sekunden...");
+                 }
+
+                 if (countdown_sec == 0) {
+                     try {
+                         startsys.initStory();
+                     } catch (SQLException e) {
+                         throw new RuntimeException(e);
+                     }
+                     cancel(); //Funfact bukkit hat eine cancel methode bereits integriert; Einfach cancel(); schreiben in der Bukkit Runnable
+                 }
+
+                 countdown_sec--;
+
+             }
+         }.runTaskTimer(main.getInstance(),0, 20);
     }
 
     public static void Countdown_insustart() throws SQLException {
@@ -94,7 +107,7 @@ public class startsys {
             MYSQL.setStarted(AllOnlinePlayers.getName(), "true");
         }
 
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(main.getInstance(), new BukkitRunnable() {
+        new BukkitRunnable() {
             @Override
             public void run() {
                 if (countdown_s == 0) {
@@ -111,7 +124,7 @@ public class startsys {
 
                 utils.broadcastActionbar("§a§lStart in §2§l " + countdown_s + "§a§lSekunden!");
             }
-        }, 0, 20);
+        }.runTaskTimer(main.getInstance(), 0, 20);
     }
 
     public static void initStory() throws SQLException {
@@ -124,7 +137,6 @@ public class startsys {
             //add effect
             AllOnlinePlayers.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999, 250, false, false));
             AllOnlinePlayers.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 999999, 250, false, false));
-            AllOnlinePlayers.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 999999, 250, false, false));
 
             //teleport players to airplane
             AllOnlinePlayers.teleport(airplane_start);
@@ -136,7 +148,7 @@ public class startsys {
         }
 
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), new BukkitRunnable() {
+        new BukkitRunnable() {
             @Override
             public void run() {
 
@@ -151,18 +163,18 @@ public class startsys {
                     AllOnlinePlayers.teleport(new Location (AllOnlinePlayers.getWorld(), Airplane_inair_x, Airplane_inair_y, Airplane_inair_z));
                 }
             }
-        }, 20 * 30);
+        }.runTaskLater(main.getInstance(), 20 * 30);
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), new BukkitRunnable() {
+        new BukkitRunnable() {
             @Override
             public void run() {
                 for (Player OnlinePlayer : Bukkit.getOnlinePlayers()){
                     OnlinePlayer.playSound(OnlinePlayer.getLocation(), Sound.ENTITY_BLAZE_DEATH, 100, 0);
                 }
             }
-        },200);
+        }.runTaskLater(main.getInstance(), 20 * 10);
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), new BukkitRunnable() {
+        new BukkitRunnable() {
             @Override
             public void run() {
 
@@ -171,7 +183,7 @@ public class startsys {
                 }
 
             }
-        }, 110 * 20);
+        }.runTaskLater(main.getInstance(), 20 * 110);
 
         startsys.Countdown_insustart();
 

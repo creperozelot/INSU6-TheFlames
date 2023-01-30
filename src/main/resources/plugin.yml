@@ -39,4 +39,17 @@ commands:
     description: Setze die Startkoordinaten von der Story (Flugzeug Air)
     permission: insu.admin.story.airplane.air
     permission-message: §cDu hast keine Berechtigung dafür!
+  start:
+    description: Startet das Projekt
+    permission: insu.admin.start
+    permission-message: §cDu hast keine Berechtigung dafür!
+  mute:
+    description: Muted einen Spieler
+    permission: insu.admin.start
+    permission-message: §cDu hast keine Berechtigung dafür!
+  unmute:
+    description: Muted einen Spieler
+    permission: insu.admin.start
+    permission-message: §cDu hast keine Berechtigung dafür!
+
 

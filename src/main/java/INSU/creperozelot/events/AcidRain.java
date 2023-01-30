@@ -16,17 +16,16 @@ public class AcidRain {
     public static void run() {
         StaticCache.eventrunning = true;
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), new BukkitRunnable() {
+        new BukkitRunnable() {
             @Override
             public void run() {
                 StaticCache.eventrunning = false;
             }
-        }, 20 * 120);
+        }.runTaskLater(main.getInstance(), 20L * 120L);
 
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(main.getInstance(), new BukkitRunnable() {
+        new BukkitRunnable() {
             @Override
             public void run() {
-
                 if (runned == 0) {
                     cancel();
                 };
@@ -55,7 +54,7 @@ public class AcidRain {
 
                 runned--;
             }
-        }, 20, 0);
+        }.runTaskTimer(main.getInstance(), 20L, 0L);
 
     }
 

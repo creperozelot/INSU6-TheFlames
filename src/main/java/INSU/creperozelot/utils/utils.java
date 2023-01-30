@@ -1,6 +1,8 @@
 package INSU.creperozelot.utils;
 
 import INSU.creperozelot.main;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
@@ -19,6 +21,22 @@ public class utils {
         for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
             AllOnlinePlayers.sendTitle(title, subtitle, fadein, stay, fadeout);
         }
+    }
+
+    public static boolean dchasrole(Member member, String RoleID) {
+        List<String> ids = new ArrayList<>();
+
+        for (Role role : member.getRoles()){
+
+            ids.add(role.getId());
+
+        }
+
+        return ids.contains(RoleID);
+    }
+
+    public static String permsmsgdc() {
+        return "<:Madge:961579692341747783> **__Du hast auf diesen Befehl keine Berechtigung!__**";
     }
 
     public static int random(int min, int max) {

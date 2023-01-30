@@ -18,9 +18,9 @@ public class CommandSetStoryAirplaneAIr implements CommandExecutor {
 
 
             player.sendMessage(StaticCache.prefix + "§aErfolgreich! Neuer Ort für Airplane_STORY_air gesetzt auf §r§a§lX: " + x +  "§r§a§l Y: " + y + "§r§a§l Z:" + z);
-            main.getInstance().getConfig().set("story.airplane.air.x", x);
-            main.getInstance().getConfig().set("story.airplane.air.y", y);
-            main.getInstance().getConfig().set("story.airplane.air.z", z);
+            main.getInstance().getConfig().set("story.airplane.inair.x", x);
+            main.getInstance().getConfig().set("story.airplane.inair.y", y);
+            main.getInstance().getConfig().set("story.airplane.inair.z", z);
             main.getInstance().saveConfig();
 
         } else {

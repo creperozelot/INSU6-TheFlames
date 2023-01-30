@@ -1,49 +1,55 @@
 main:
+  main: 'creperozelot'
   map: "world"
   prefix: '§e§lIN§6§lSU §f§l6 §r§7|§6 '
   countdown:
     minutes: 5
+  maintenance: true
+  spawncoords:
+    x: 0
+    z: 0
   #DO NOT TOUCH BEGIN-----------------------------------------------------------
   started: false
   #DO NOT TOUCH END-----------------------------------------------------------
+  autorunevents: false
 
 messages:
   death:
-    entity_attack: '{Player} ist an {entity} gestorben.'
-    fall: '{Player} ist an Fall Damage gestorben.'
-    lava: '{Player} ist in Lava gestorben.'
-    void: '{Player} ist im Void gestorben.'
-    magic: '{Player} ist an Magie gestorben'
-    poison: '{Player} ist an gift gestorben!'
-    thorns: '{Player} ist an dornen gestorben!'
+    entity_attack: '{Player} ist an {entity} auf bodenloser Art und Weise gekillt worden!'
+    fall: '{Player} hat den Green gemacht, NEIIIIIIIN!'
+    lava: '{Player} ist in fließender Lava gestorben, Noob!'
+    void: '{Player} ist im Bodenlose verreckt.'
+    magic: '{Player} ist an Vikthors Magie gestorben'
+    poison: '{Player} ist an Gift verreckt!'
+    thorns: '{Player} ist an einer guten Rüstung gestorben!'
     wither: '{Player} ist an einem Wither gestorben.'
-    melting: '{Player} ist geschmoltzen'
-    contact: '{Player} Ist an einem Kakuts oder so Gestorben.'
-    suicide: '{Player} hat sich selbst umgebracht.'
-    cramming: '{Player} ist an keine ahnung gestorben.'
-    drowning: '{Player} ist ertrunken!'
-    lightning: '{Player} wurde von einem Blitz getroffen!'
-    projectile: '{Player} wurde von {entity} zerschoßen!'
-    starvation: '{Player} ist an keine ahnung gestorben!'
-    suffocation: '{Player ist in einem Block erstickt!}'
-    entity_explosion: '{Player} wurde von {entity} in die Luft gesprengt!'
+    melting: '{Player} ist geschmolzen, Kelb'
+    contact: '{Player} Ist an einem Kaktus oder so gestorben.'
+    suicide: '{Player} konnte das alles nicht mehr ertragen.'
+    cramming: '{Player} ist an Ahnungslosigkeit gestorben.'
+    drowning: '{Player} ist ertrunken, Lost?!'
+    lightning: '{Player} wurde von Vikthor seiner Macht getroffen!'
+    projectile: '{Player} wurde von {entity} (Main Character) zerschossen!'
+    starvation: '{Player} ist zu doof für´s essen!'
+    suffocation: '{Player ist in einem bestehenden Block erstickt!}'
+    entity_explosion: '{Player} wurde von {entity} zu Tode gebombt!'
     entity_sweep_attack: '{Player} wurde von {entity} weg geschnetzelt'
-    fire: '{Player} verbrennt gerade'
-    fire_tick: '{Player} verbrennt gerade'
+    fire: '{Player} wurde von Flame gegrillt'
+    fire_tick: '{Player} verbrennt gerade durch Flame'
     custom: '{Player} ist an was unbekanntem gestorben!'
-    hot_floor: '{Player} hat sich den Arsch verbrannt!'
-    deagon_breath: '{Player} wurde vom Drachenatem gekillt!'
-    falling_block: '{Player} wurde von einem Fallenden Block zerquetscht'
-    fly_into_wall: '{Player} hat die Wand nicht gesehen!'
-    block_explosion: '{Player} wurde von einem Explodierenden block getroffen!'
-    others: 'Die Todesursache von {Player} ist nicht bekannt!'
-
+    hot_floor: '{Player} wurde von Flame gekillt!'
+    deagon_breath: '{Player} ist an Vikthor seinem Atemzug gestorben!'
+    falling_block: '{Player} wurde vermutlich druch Kies oder Sand zerquetscht'
+    fly_into_wall: '{Player} musste ja versuchen in die Wand zu glitchen!'
+    block_explosion: '{Player} wurde von einem Explodierenden Item (TNT?) zerbombt!'
+    others: '{Player} ist jetzt in einer anderen Welt :('
+  errconsolerun: '§cDu kannst diese Command nur als Spieler ausführen!'
 #schema: question;answer
 questions:
   - Wer hat INSU 1 Gewonnen?;Raichu
   - Wer ist der Gründer von INSU (Nur einer ist Richtig (Inagemname)?;ToadenationNr1
   - Wie heißt Obama mit ganzem Namen?;Barack Hussein Obama
-  - Wie alt ist die Queen zirka geworden?; 96
+  - Wie alt ist die Queen zirka geworden?;96
   - Wie heißt ein helles Mammut?;Hellmut
   - was macht man mit einem Hund ohne Beine?;Um die Häuser ziehen
   - Wo kauft man 53 Melonen?;Im Mathebuch

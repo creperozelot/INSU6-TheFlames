@@ -20,7 +20,5 @@ public class utils {
         return ids.contains(roleid);
     }
 
-    public static String noperms() {
-        return "❌ **Du hast leider keine Berechtigung diese Command auszuführen!**";
-    }
+
 }

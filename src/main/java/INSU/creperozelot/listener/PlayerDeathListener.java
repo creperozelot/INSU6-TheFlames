@@ -20,10 +20,15 @@ public class PlayerDeathListener implements Listener {
         //MYSQL
         MYSQL.setDeath(player.getName(), 1);
 
+        if (!MYSQL.isGameMaster(player.getName())) {
+            player.kickPlayer("§c§lSystem: \n §cDu bist ausgeschieden und wurdest aus der Datenbank entfernt!");
+            MYSQL.update("DELETE FROM INSU WHERE PLAYER='" + player.getName() + "';");
+        }
+
 
         switch (player.getLastDamageCause().getCause()) {
             case ENTITY_ATTACK:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.entity_attack").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.entity_attack").replace("{player}", player.getName()).replace("{killer}", killer.getName()));
                 break;
             case FALL:
                 event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.fall").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
@@ -53,7 +58,7 @@ public class PlayerDeathListener implements Listener {
                 event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.contact").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
                 break;
             case SUICIDE:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.suicide").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.suicide").replace("{player}", player.getName()).replace("{killer}", killer.getName()));
                 break;
             case CRAMMING:
                 event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.cramming").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
@@ -108,10 +113,7 @@ public class PlayerDeathListener implements Listener {
                 break;
         }
 
-        if (!MYSQL.isGameMaster(player.getName())) {
-            player.kickPlayer("§c§lSystem: \n §cDu bist ausgeschieden und wurdest aus der Datenbank entfernt!");
-            MYSQL.update("DELETE FROM INSU WHERE PLAYER='" + player.getName() + "';");
-        }
+
 
     }
 }

@@ -4,6 +4,9 @@ import net.dv8tion.jda.api.JDA;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class StaticCache {
     private StaticCache() {} //Prevent Instantiation
@@ -23,5 +26,14 @@ public class StaticCache {
     public static boolean freeze = false;
 
     public static boolean pickupevent = false;
+
+    public static boolean startconfirmed = false;
     public static Material pickupitem = Material.BEDROCK;
+
+    public static List<String> muted_players = new ArrayList<String>();
+
+    public static String consoleerr = main.getInstance().getConfig().getString("messages.errconsolerun");
+
+    //Task IDS
+    public static int Task_WaitingforHost_id = 0;
 }

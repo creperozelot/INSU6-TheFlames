@@ -82,9 +82,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.TJPlaysNow</groupId>
-            <artifactId>Discord-Bot-API---JDA</artifactId>
-            <version>bb783a3816</version>
+            <groupId>net.dv8tion</groupId>
+            <artifactId>JDA</artifactId>
+            <version>5.0.0-beta.2</version>
         </dependency>
     </dependencies>
 </project>
