@@ -21,8 +21,10 @@ import java.util.concurrent.TimeUnit;
 public class startsys {
     static int countdown_sec = 60 * main.getInstance().getConfig().getInt("main.countdown.minutes");
 
-    static int countdown_min = main.getInstance().getConfig().getInt("main.countdown.minutes");
-    public static void countdown(int CountdownMinutes) {
+    static int countdown_s = 0;
+
+    static int countdown_min = main.getInstance().getConfig().getInt("main.countdown.minutes") + 1;
+    public static void countdown() {
 
 
 
@@ -47,6 +49,7 @@ public class startsys {
 
                  if ( countdown_sec == 30 || countdown_sec == 20 || countdown_sec <= 10) {
                      Bukkit.broadcastMessage(StaticCache.prefix + "Start in §f" + countdown_sec + "§6 Sekunden...");
+                     StaticCache.storyrunning = true;
                  }
 
                  if (countdown_sec == 0) {
@@ -55,7 +58,7 @@ public class startsys {
                      } catch (SQLException e) {
                          throw new RuntimeException(e);
                      }
-                     cancel(); //Funfact bukkit hat eine cancel methode bereits integriert; Einfach cancel(); schreiben in der Bukkit Runnable
+                     cancel();
                  }
 
                  countdown_sec--;
@@ -65,7 +68,12 @@ public class startsys {
     }
 
     public static void Countdown_insustart() throws SQLException {
-        int countdown_s = 30;
+        countdown_s = 30;
+
+        for (Player AllOnlinePlayer : Bukkit.getOnlinePlayers()) {
+            AllOnlinePlayer.removePotionEffect(PotionEffectType.INVISIBILITY);
+            AllOnlinePlayer.removePotionEffect(PotionEffectType.WEAKNESS);
+        }
 
         StaticCache.freeze = true;
         try {
@@ -75,9 +83,9 @@ public class startsys {
 
                 List<String> players = MYSQL.getPlayerbyTeam(team);
 
-                int x = utils.random(-750, 750);
+                int x = utils.random(-100, 100);
 
-                int z = utils.random(-750, 750);
+                int z = utils.random(-100, 100);
 
                 Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")).loadChunk(x,z);
 
@@ -112,8 +120,9 @@ public class startsys {
             public void run() {
                 if (countdown_s == 0) {
                     cancel();
+                    StaticCache.storyrunning = false;
                     StaticCache.freeze = false;
-                    utils.broadcastTitle("§e§lIN§6§lSU", "ist §aGESTARTET!", 10, 80, 20);
+                    utils.broadcastTitle(StaticCache.prefix, "ist §aGESTARTET!", 10, 80, 20);
 
                 }
 
@@ -123,11 +132,13 @@ public class startsys {
                 }
 
                 utils.broadcastActionbar("§a§lStart in §2§l " + countdown_s + "§a§lSekunden!");
+                countdown_s--;
             }
         }.runTaskTimer(main.getInstance(), 0, 20);
     }
 
     public static void initStory() throws SQLException {
+
         int Airplane_start_x = main.getInstance().getConfig().getInt("story.airplane.start.x");
         int Airplane_start_y = main.getInstance().getConfig().getInt("story.airplane.start.y");
         int Airplane_start_z = main.getInstance().getConfig().getInt("story.airplane.start.z");
@@ -146,6 +157,8 @@ public class startsys {
             AllOnlinePlayers.playSound(AllOnlinePlayers.getLocation(), Sound.ENTITY_GHAST_DEATH, 100, 0);
 
         }
+
+
 
 
         new BukkitRunnable() {
@@ -185,7 +198,16 @@ public class startsys {
             }
         }.runTaskLater(main.getInstance(), 20 * 110);
 
-        startsys.Countdown_insustart();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                try {
+                    startsys.Countdown_insustart();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }.runTaskLater(main.getInstance(), 20 * 155);
 
 
     }
