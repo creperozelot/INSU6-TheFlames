@@ -52,7 +52,7 @@ public class InfoMessage {
 
                                 String team = result.getString("TEAM");
 
-                                //INFO >>>> Kannst auch MYSQL.setDeath(playername, deathid); benutzen. Also MYSQL.setDeath(player.getName(), 2);
+                                //INFO >>>> Kannst auch MYSQL.setDeath(playername, deathid); benutzen. Also MYSQL.setDeath(player.getName().replace(" ", "_"), 2);
                                 MYSQL.con.createStatement().execute("UPDATE `INSU` SET `DEATH` = '2' WHERE `PLAYER` = '" + playername + "'");
 
                                 player.add(playername + " - " + team);

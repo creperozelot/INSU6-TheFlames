@@ -6,6 +6,7 @@ import INSU.creperozelot.utils.MYSQL;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,8 +23,9 @@ public class PlayerJoinListener implements Listener {
 
         if (!MYSQL.isConnected()) {
             event.getPlayer().kickPlayer("§c§lSystemfehler: \n §r§cDatenbank nicht verbunden!");
-        } else if (!main.getInstance().getConfig().getBoolean("maintenance")) {
-
+        } else if (StaticCache.storyrunning) {
+            event.getPlayer().kickPlayer("§c§lFehler: \n §cINSU Startet gerade, bitte warte kurz und versuche es nach dem Start erneut.");
+        } else if (!main.getInstance().getConfig().getBoolean("main.maintenance") || MYSQL.isGameMaster(event.getPlayer().getName())) {
             if (!MYSQL.isStarted(event.getPlayer().getName()) && main.getInstance().getConfig().getBoolean("main.started")) {
                 event.getPlayer().teleport(new Location(Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")), 1, 1, 1));
                 MYSQL.setStarted(event.getPlayer().getName(), "true");
@@ -31,6 +33,7 @@ public class PlayerJoinListener implements Listener {
 
             Player player = event.getPlayer();
             int OnlinePlayers = Bukkit.getOnlinePlayers().size();
+            StaticCache.bossBar.addPlayer(player);
 
             event.setJoinMessage(StaticCache.prefix + "Der Spieler §e" + player.getDisplayName() + "§6 ist dem Projekt Beigetreten.");
             player.sendMessage(StaticCache.prefix + "§cBEACHTE! Alles was du sagst wird geloggt! Wähle deine Worte weise.");
@@ -53,14 +56,13 @@ public class PlayerJoinListener implements Listener {
             }
 
             if (!MYSQL.PlayerExist(player.getName())) {
-                player.kickPlayer("§c§lFehler: \n §r§cDu bist nicht in der Datenbank eingetragen. \n §cStelle sicher das du dich bei INSU beworben hast und Aktzeptiert wurdest.");
+                player.kickPlayer("§c§lFehler: \n §r§cDu bist nicht in der Datenbank eingetragen. Dies kann folgende Gründe haben: \n §c1. Du hast dich nicht bei INSU beworben. \n §c2. Du wurdest nicht bei INSU aktzeptiert. \n §c3. Du bist Tot und bist damit AUsgeschieden.");
             }
         } else {
             Player player = event.getPlayer();
-
-            if (!MYSQL.isGameMaster(player.getName())) {
                 player.kickPlayer("§c§lWartungen: \n §r§cGerade befindet sich INSU in den Wartungen, versuche es später noch einmal.");
-            }
         }
+
+
     }
 }

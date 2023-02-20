@@ -12,6 +12,7 @@ public class FriendlyFire implements Listener {
     @EventHandler
     public void FriendlyFire(EntityDamageByEntityEvent event) throws SQLException {
         if (event.getEntity() instanceof Player && event.getDamager() instanceof Player) {
+            System.out.println("DEBUG 1");
             if (MYSQL.arePlayersinTeams(event.getEntity().getName(), event.getDamager().getName())) {
                 event.setCancelled(true);
             }

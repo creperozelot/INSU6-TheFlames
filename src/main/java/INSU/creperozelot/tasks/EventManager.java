@@ -41,14 +41,10 @@ public class EventManager {
                                 RandomEffekt.run();
                                 break;
                             case 8:
-                                TPUP.run();
+                                // EVENT TPUP REMOVED (MANUALLY START)
                                 break;
                             case 9:
                                 WeitEntfernt.run();
-                                break;
-                            case 10:
-                                break;
-                            case 11:
                                 break;
                             default:
                                 break;

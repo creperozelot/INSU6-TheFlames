@@ -43,6 +43,9 @@ public class CommandStartEvent implements CommandExecutor {
                     case "weitentfernt":
                         WeitEntfernt.run();
                         break;
+                    case "kaktus":
+                        Kaktuse.run();
+                        break;
                     default:
                         player.sendMessage("§cUsage: /eventstart <acidrain | findtheitem | findtheplayer | glückstreffer | hungersnot | insuquiz | randomeffekt | tpup | weitentfernt>");
                         break;

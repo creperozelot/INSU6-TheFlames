@@ -10,7 +10,7 @@ public class PlayerLeaveListener implements Listener {
     @EventHandler
     public void PlayerLeaveListener(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-
+        StaticCache.bossBar.removePlayer(player);
         event.setQuitMessage(StaticCache.prefix + "Der Spieler §e" + player.getDisplayName() + "§6 hat das Projekt verlassen.");
     }
 }

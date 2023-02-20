@@ -22,18 +22,27 @@ public class FindTheItem implements Listener {
         Player player = (Player) event.getEntity();
 
         if (StaticCache.pickupevent) {
-            if (event.getItem().getType().equals(StaticCache.pickupitem)) {
+            if (event.getItem().getItemStack().getType() == Material.getMaterial(StaticCache.pickupitem)) {
                 StaticCache.pickupevent = false;
-                StaticCache.pickupitem = Material.BEDROCK;
+                StaticCache.eventrunning = false;
+                StaticCache.bossBar.setTitle(StaticCache.bossbarmsg);
+                StaticCache.pickupitem = -1;
 
                 List<Material> materials = Arrays.asList(Material.values());
                 int randomMaterial = utils.random(0, materials.size());
 
                 ItemStack newitems = new ItemStack(materials.get(randomMaterial));
-                newitems.setAmount(1);
+
+                if (newitems.getType() == Material.DIAMOND_BLOCK || newitems.getType() == Material.GOLD_BLOCK || newitems.getType() == Material.ENDER_PEARL) {
+                    newitems.setAmount(utils.random(1, 3));
+                } else if (newitems.getType() == Material.DIAMOND || newitems.getType() == Material.GOLD_INGOT) {
+                    newitems.setAmount(utils.random(1, 32));
+                } else {
+                    newitems.setAmount(utils.random(1, 64));
+                }
 
                     player.getInventory().addItem(newitems);
-                    player.sendMessage(StaticCache.prefix + "§aDu hast das Item " + StaticCache.pickupitem.name() + " §r§aBekommen.");
+                    player.sendMessage(StaticCache.prefix + "§aDu hast das Item " + Material.getMaterial(newitems.getTypeId()).name().replace("_", "") + " §r§aBekommen.");
                     Bukkit.broadcastMessage(StaticCache.prefix + "§aDer Spieler §a§l" + player.getName() + "§r§ahat Gewonnen");
 
             }
@@ -46,18 +55,19 @@ public class FindTheItem implements Listener {
 
         StaticCache.eventrunning = true;
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), new BukkitRunnable() {
+        new BukkitRunnable() {
             @Override
             public void run() {
                 StaticCache.eventrunning = false;
             }
-        }, 20 * 120);
+        }.runTaskLater(main.getInstance(),20 * 120);
 
         StaticCache.pickupevent = true;
         List<Material> materials = Arrays.asList(Material.values());
         int randomitem = utils.random(0, materials.size());
-        StaticCache.pickupitem = materials.get(randomitem);
+        StaticCache.pickupitem = materials.get(randomitem).getId();
 
-        Bukkit.broadcastMessage(StaticCache.prefix + "§aDas Item ist §a§l" + StaticCache.pickupitem.name());
+        Bukkit.broadcastMessage(StaticCache.prefix + "§aDas Item ist §a§l" + Material.getMaterial(StaticCache.pickupitem).name().replace("_", ""));
+        StaticCache.bossBar.setTitle("§6Event §8» §aDas Item ist §a§l" + Material.getMaterial(StaticCache.pickupitem).name().replace("_", " "));
     }
 }

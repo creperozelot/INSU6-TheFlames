@@ -22,6 +22,7 @@ public class FindThePlayer {
             @Override
             public void run() {
                 StaticCache.eventrunning = false;
+                StaticCache.bossBar.setTitle(StaticCache.bossbarmsg);
             }
         }.runTaskLater(main.getInstance(), 20 * 120);
 
@@ -42,21 +43,21 @@ public class FindThePlayer {
                     int y = (int) randomplayer.getLocation().getY();
                     int z = (int) randomplayer.getLocation().getZ();
 
-                    Bukkit.broadcastMessage(StaticCache.prefix + "§aDer Spieler befindet sich Hier! \n §lX: " + x + " §a§lY :" + y + " §a§lZ: " + z);
-
+                    StaticCache.bossBar.setTitle("§6Event §8» §aDer Spieler ist hier §a§lX: " + x + " §a§lY: " + y + " §a§lZ: " + z);
                     runned--;
 
                 }
-            }.runTaskTimer(main.getInstance(), 20L * 10L, 0L);
+            }.runTaskTimer(main.getInstance(), 0L, 20L * 10L);
 
 
             if (istrue == 0) {
 
                 new BukkitRunnable() {
 
-                    int x = (int) randomplayer.getLocation().getX() + utils.random(0, 500);
-                    int y = (int) randomplayer.getLocation().getX() + utils.random(0, 500);
-                    int z = (int) randomplayer.getLocation().getX() + utils.random(0, 500);
+
+                    int x = (int) randomplayer.getLocation().getX() + utils.random(0, 10);
+                    int y = (int) randomplayer.getLocation().getX() + utils.random(0, 10);
+                    int z = (int) randomplayer.getLocation().getX() + utils.random(0, 10);
 
                     @Override
                     public void run() {
@@ -73,12 +74,13 @@ public class FindThePlayer {
                         int znow1 = znow - utils.random(0, 60);
 
 
-                        Bukkit.broadcastMessage(StaticCache.prefix + "§aDer Spieler befindet sich Hier! \n §lX: " + xnow1 + " §a§lY :" + ynow1 + " §a§lZ: " + znow1);
+                        StaticCache.bossBar.setTitle("§6Event §8» §aDer Spieler ist hier §a§lX: " + xnow + " §a§lY: " + ynow + " §a§lZ: " + znow1);
 
+                        runned--;
                     }
 
 
-                }.runTaskTimer(main.getInstance(), 20L * 10L, 0L);
+                }.runTaskTimer(main.getInstance(), 0L, 20L * 10L);
             }
         }
     }

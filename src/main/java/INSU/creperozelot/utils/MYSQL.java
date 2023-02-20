@@ -5,6 +5,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,10 +30,10 @@ public class MYSQL {
     public static void connect() {
         if (!isConnected())
             try {
-                con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
-                System.out.println("| [INSU] MYSQL Verbindung hergestellt                     |");
+                con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database + "?autoreonnect=true", username, password);
+                System.out.println("[INSU] MYSQL Verbindung hergestellt");
             } catch (SQLException e) {
-                System.out.println("| [INSU] MYSQL Verbindung konnte nicht hergestellt werden.|");
+                System.out.println("[INSU] MYSQL Verbindung konnte nicht hergestellt werden.");
             }
     }
 
@@ -78,7 +79,7 @@ public class MYSQL {
     public static boolean arePlayersinTeams(String player1, String player2) throws SQLException {
         boolean bol = false;
 
-        List<String> teamplayers =  MYSQL.getPlayerbyTeam(MYSQL.getTeambyName(player1));
+        List<String> teamplayers =  MYSQL.getPlayerbyTeamID(MYSQL.getTeamIDbyName(player1));
 
         if (teamplayers.contains(player2)) {
             bol = true;
@@ -290,6 +291,31 @@ public class MYSQL {
         }
         return players;
     }
+
+    public static List<String> getPlayerbyTeamID(int id) throws SQLException {
+
+        Statement stmt = con.createStatement();
+
+        ResultSet result = stmt.executeQuery("SELECT * FROM `INSU` WHERE `ID`='" + id + "';");
+
+        result.first();
+
+        List<String> players = new ArrayList<>();
+
+        if (con.createStatement().executeQuery("SELECT * FROM `INSU` WHERE `ID`='" + id + "';").next()) {
+
+            while (!result.isAfterLast()) {
+
+                String team = result.getString("PLAYER");
+
+                players.add(team);
+
+                result.next();
+
+            }
+        }
+        return players;
+    }
     public static String getTeambyName(String playername) throws SQLException {
 
         if (con.createStatement().executeQuery("SELECT TEAM FROM `INSU` WHERE PLAYER='" + playername + "';").next()) {
@@ -311,6 +337,30 @@ public class MYSQL {
             }
         } else {
             return "**No team**";
+        }
+    }
+
+    public static int getTeamIDbyName(String playername) throws SQLException {
+
+        if (con.createStatement().executeQuery("SELECT ID FROM `INSU` WHERE PLAYER='" + playername + "';").next()) {
+
+            try {
+                Statement stmt = con.createStatement();
+
+                ResultSet result = stmt.executeQuery("SELECT ID FROM `INSU` WHERE PLAYER='" + playername + "';");
+
+                result.first();
+
+                int team = result.getInt("ID");
+
+                return team;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return -403;
+            }
+        } else {
+            return -404;
         }
     }
 
@@ -439,6 +489,23 @@ public class MYSQL {
     }
 
 
+    public static void keepalive() {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                try {
+
+
+                    Statement stmt = con.createStatement();
+                    stmt.executeQuery("SELECT 'KEEP_ALIVE';").next();
+                } catch (SQLException e){
+
+                    e.printStackTrace();
+
+                }
+            }
+        }.runTaskTimer(main.getInstance(), 0, 20 * 60 * 10);
+    }
 }
 
 

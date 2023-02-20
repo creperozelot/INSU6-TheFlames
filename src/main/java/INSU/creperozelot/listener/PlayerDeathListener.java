@@ -1,14 +1,17 @@
 package INSU.creperozelot.listener;
 
 import INSU.creperozelot.StaticCache;
+import INSU.creperozelot.dc.bot.botlogic;
 import INSU.creperozelot.main;
 import INSU.creperozelot.utils.MYSQL;
+import net.dv8tion.jda.api.EmbedBuilder;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
+import java.awt.*;
 import java.sql.SQLException;
 
 public class PlayerDeathListener implements Listener {
@@ -25,6 +28,11 @@ public class PlayerDeathListener implements Listener {
             MYSQL.update("DELETE FROM INSU WHERE PLAYER='" + player.getName() + "';");
         }
 
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle(player.getName()  + "ist Gestorben");
+        eb.setDescription(":skull_crossbones:" + event.getDeathMessage());
+        eb.setColor(Color.BLACK);
+        botlogic.sendEmbedMessage(eb.build(), "732648259599728661");
 
         switch (player.getLastDamageCause().getCause()) {
             case ENTITY_ATTACK:
@@ -112,7 +120,6 @@ public class PlayerDeathListener implements Listener {
                 event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.others").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
                 break;
         }
-
 
 
     }

@@ -8,7 +8,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class WaitingForHost {
     public static int run() {
         int hostscheduler = 0;
-        if  (main.getInstance().getConfig().getBoolean("main.started")) {
+        if  (!main.getInstance().getConfig().getBoolean("main.started")) {
             hostscheduler = new BukkitRunnable() {
                 @Override
                 public void run() {

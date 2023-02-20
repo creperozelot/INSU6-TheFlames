@@ -15,16 +15,16 @@ public class onCraftItemListener implements Listener {
         HumanEntity humanEntity = event.getWhoClicked();
         if (humanEntity instanceof Player) {
             Player player = (Player) humanEntity;
-            switch (item.getTypeId()) {
-                case 346: // Fishing_rod
+            switch (item.getType()) {
+                case FISHING_ROD: // Fishing_rod
                     event.setCancelled(true);
                     player.sendMessage(StaticCache.prefix + "§cDu kannst dieses Item nicht Craften!");
                     break;
-                case 436: //soup
+                case BEETROOT_SOUP: //soup
                     event.setCancelled(true);
                     player.sendMessage(StaticCache.prefix + "§cDu kannst dieses Item nicht Craften!");
                     break;
-                case 282: //soup
+                case MUSHROOM_SOUP: //soup
                     event.setCancelled(true);
                     player.sendMessage(StaticCache.prefix + "§cDu kannst dieses Item nicht Craften!");
                     break;

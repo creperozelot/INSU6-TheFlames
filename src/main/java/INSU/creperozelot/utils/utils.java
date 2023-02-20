@@ -1,12 +1,16 @@
 package INSU.creperozelot.utils;
 
+import INSU.creperozelot.StaticCache;
 import INSU.creperozelot.main;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -21,6 +25,20 @@ public class utils {
         for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
             AllOnlinePlayers.sendTitle(title, subtitle, fadein, stay, fadeout);
         }
+    }
+
+    public static boolean ifblockabove(Location loc){
+        boolean bol = false;
+        for (int i = loc.getBlockY(); i < 256; i++){
+            Block block = loc.getWorld().getBlockAt(loc.getBlockX(), i, loc.getBlockZ());
+
+            if(block != null && !block.isLiquid()
+                    && block.getType() != Material.AIR) {
+                bol = true;
+            }
+        }
+
+        return bol;
     }
 
     public static boolean dchasrole(Member member, String RoleID) {
@@ -75,6 +93,7 @@ public class utils {
     public static void eventanimation(String eventname, String eventname1, String eventname2, String eventname3, String eventname4, String eventname5, String eventname6) {
         broadcastTitle("§6§le", eventname1, 10, 10, 0);
         broadcastSound(Sound.BLOCK_NOTE_BASS);
+        StaticCache.bossBar.setTitle(StaticCache.prefix + "§cEvent §a" + eventname + " §cstatet...");
 
 
         (new BukkitRunnable() {

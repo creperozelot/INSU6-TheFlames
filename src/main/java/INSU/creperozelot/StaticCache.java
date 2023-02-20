@@ -2,10 +2,15 @@ package INSU.creperozelot;
 
 import net.dv8tion.jda.api.JDA;
 import org.bukkit.Material;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.bukkit.Bukkit.getServer;
 
 
 public class StaticCache {
@@ -25,10 +30,12 @@ public class StaticCache {
     public static boolean eventrunning = false;
     public static boolean freeze = false;
 
+    public static boolean storyrunning = false;
+
     public static boolean pickupevent = false;
 
     public static boolean startconfirmed = false;
-    public static Material pickupitem = Material.BEDROCK;
+    public static int pickupitem = -1;
 
     public static List<String> muted_players = new ArrayList<String>();
 
@@ -36,4 +43,12 @@ public class StaticCache {
 
     //Task IDS
     public static int Task_WaitingforHost_id = 0;
+
+    //BOSSBAR
+
+
+
+    public static String bossbarmsg = StaticCache.prefix + "§6Infos werden hier angezeigt!";
+    public static BossBar bossBar = getServer().createBossBar(bossbarmsg, BarColor.YELLOW, BarStyle.SOLID);
+
 }

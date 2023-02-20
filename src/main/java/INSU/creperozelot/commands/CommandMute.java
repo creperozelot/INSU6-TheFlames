@@ -14,6 +14,8 @@ public class CommandMute implements CommandExecutor {
         } else {
             if (Bukkit.getPlayer(args[0]) == null) {
                 sender.sendMessage(StaticCache.prefix + "§Usage: Der Spieler " + args[0] + " §cwurde nicht gefunden!");
+            } else if (StaticCache.muted_players.contains(args[0])) {
+                sender.sendMessage(StaticCache.prefix + "§cDieser Spieler ist bereit gemuted!");
             } else {
                 sender.sendMessage(StaticCache.prefix + "§aDu hast den Spieler §l " + args[0] + " §r§awurde gemuted.");
                 StaticCache.muted_players.add(args[0]);

@@ -51,5 +51,9 @@ commands:
     description: Muted einen Spieler
     permission: insu.admin.start
     permission-message: §cDu hast keine Berechtigung dafür!
+  dbreconnect:
+    description: Startet die Datenbank Verbindung neu!
+    permission: insu.admin.start
+    permission-message: §cDu hast keine Berechtigung dafür!
 
 

@@ -5,6 +5,7 @@ import INSU.creperozelot.main;
 import INSU.creperozelot.utils.utils;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,12 +35,14 @@ public class InsuQuiz implements Listener {
 
         StaticCache.eventrunning = true;
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), new BukkitRunnable() {
+        new BukkitRunnable() {
             @Override
             public void run() {
                 StaticCache.eventrunning = false;
+                StaticCache.bossBar.setTitle(StaticCache.bossbarmsg);
+
             }
-        }, 20 * 120);
+        }.runTaskLater(main.getInstance(),20 * 120);
 
 
         StaticCache.eventrunning = true;
@@ -77,6 +81,7 @@ public class InsuQuiz implements Listener {
         answer = questions.split(";")[1].toString();
 
         main.getInstance().getServer().broadcastMessage(StaticCache.prefix + "§1Frage: §7" + question);
+        StaticCache.bossBar.setTitle("§6Event §8» §Die Frage ist §a§l" + question);
 
     }
 
@@ -95,11 +100,19 @@ public class InsuQuiz implements Listener {
                 questionnum++;
 
                 player.sendMessage(StaticCache.prefix + "§aDas ist die richte Antwort!");
+                StaticCache.bossBar.setTitle(StaticCache.bossbarmsg);
 
                 main.getInstance().getServer().broadcastMessage(StaticCache.prefix + "§2Der Spieler §6" + player.getName() + " §2hat die richtige Antwort: §7" + answer + "§2!");
 
                 //irgendwas mit belohnung oder so
+                List<Material> materials = Arrays.asList(Material.values());
+                int randomMaterial = utils.random(0, materials.size());
 
+                ItemStack newitems = new ItemStack(materials.get(randomMaterial));
+                newitems.setAmount(1);
+
+                player.getInventory().addItem(newitems);
+                player.sendMessage(StaticCache.prefix + "§aDu hast das Item " + Material.getMaterial(newitems.getTypeId()).name().replace("_", "") + " §r§aBekommen.");
                 end();
             } else {
 

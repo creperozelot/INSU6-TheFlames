@@ -17,21 +17,24 @@ public class RandomEffekt {
 
         StaticCache.eventrunning = true;
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), new BukkitRunnable() {
+        new BukkitRunnable() {
             @Override
             public void run() {
                 StaticCache.eventrunning = false;
             }
-        }, 20 * 120);
+        }.runTaskLater(main.getInstance(), 20 * 120);
 
         List<PotionEffectType> effects = Arrays.asList(PotionEffectType.values());
+        effects.remove(PotionEffectType.WITHER);
+        effects.remove(PotionEffectType.REGENERATION);
+        effects.remove(PotionEffectType.HEALTH_BOOST);
 
         for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
             int randompotion = utils.random(0, effects.size());
 
             PotionEffectType potion = effects.get(randompotion);
 
-            AllOnlinePlayers.addPotionEffect(new PotionEffect(potion, 60, 1));
+            AllOnlinePlayers.addPotionEffect(new PotionEffect(potion, 20 * 60, 1));
 
         }
     }
