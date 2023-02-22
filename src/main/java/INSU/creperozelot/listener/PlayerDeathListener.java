@@ -36,88 +36,88 @@ public class PlayerDeathListener implements Listener {
 
         switch (player.getLastDamageCause().getCause()) {
             case ENTITY_ATTACK:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.entity_attack").replace("{player}", player.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.entity_attack").replace("{player}", player.getName()).replace("{entity}", killer.getName()));
                 break;
             case FALL:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.fall").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.fall").replace("{player}", player.getName()));
                 break;
             case LAVA:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.lava").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.lava").replace("{player}", player.getName()));
                 break;
             case VOID:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.void").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.void").replace("{player}", player.getName()));
                 break;
             case MAGIC:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.magic").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.magic").replace("{player}", player.getName()));
                 break;
             case POISON:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.poison").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.poison").replace("{player}", player.getName()));
                 break;
             case THORNS:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.thorns").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.thorns").replace("{player}", player.getName()));
                 break;
             case WITHER:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.wither").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.wither").replace("{player}", player.getName()));
                 break;
             case MELTING:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.melting").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.melting").replace("{player}", player.getName()));
                 break;
             case CONTACT:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.contact").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.contact").replace("{player}", player.getName()));
                 break;
             case SUICIDE:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.suicide").replace("{player}", player.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.suicide").replace("{player}", player.getName()));
                 break;
             case CRAMMING:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.cramming").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.cramming").replace("{player}", player.getName()));
                 break;
             case DROWNING:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.drowning").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.drowning").replace("{player}", player.getName()));
                 break;
             case LIGHTNING:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.lightning").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.lightning").replace("{player}", player.getName()));
                 break;
             case PROJECTILE:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.projectiles").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.projectiles").replace("{player}", player.getName()).replace("{entity}", killer.getName()));
                 break;
             case STARVATION:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.starvation").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.starvation").replace("{player}", player.getName()));
                 break;
             case SUFFOCATION:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.suffocation").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.suffocation").replace("{player}", player.getName()));
                 break;
             case ENTITY_EXPLOSION:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.entity_explosion").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.entity_explosion").replace("{player}", player.getName()).replace("{entity}", killer.getName()));
                 break;
             case ENTITY_SWEEP_ATTACK:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.entity_sweep_atack").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.entity_sweep_atack").replace("{player}", player.getName()).replace("{entity}", killer.getName()));
                 break;
             case FIRE:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.fire").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.fire").replace("{player}", player.getName()));
                 break;
             case FIRE_TICK:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.fire_tick").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.fire_tick").replace("{player}", player.getName()));
                 break;
             case CUSTOM:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.custom").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.custom").replace("{player}", player.getName()));
                 break;
             case HOT_FLOOR:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.hot_floor").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.hot_floor").replace("{player}", player.getName()));
                 break;
             case DRAGON_BREATH:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.dragon_breath").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.dragon_breath").replace("{player}", player.getName()));
                 break;
             case FALLING_BLOCK:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.falling_block").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.falling_block").replace("{player}", player.getName()));
                 break;
             case FLY_INTO_WALL:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.fly_into_wall").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.fly_into_wall").replace("{player}", player.getName()));
                 break;
             case BLOCK_EXPLOSION:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.block_explosion").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.block_explosion").replace("{player}", player.getName()));
                 break;
             default:
-                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.others").replace("{player}", killer.getName()).replace("{killer}", killer.getName()));
+                event.setDeathMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.death.others").replace("{player}", player.getName()));
                 break;
         }
 

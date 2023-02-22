@@ -5,6 +5,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.FileOutputStream;
@@ -290,6 +291,37 @@ public class MYSQL {
             }
         }
         return players;
+    }
+
+    public static String getTeammatebyPlayer(Player player) throws SQLException {
+        Statement stmt = con.createStatement();
+
+        ResultSet result = stmt.executeQuery("SELECT * FROM `INSU` WHERE `ID`='" + MYSQL.getIDbyName(player.getName()) + "';");
+
+        result.first();
+
+        List<String> players = new ArrayList<>();
+
+        if (con.createStatement().executeQuery("SELECT * FROM `INSU` WHERE `ID`='" + MYSQL.getIDbyName(player.getName()) + "';").next()) {
+
+            while (!result.isAfterLast()) {
+
+                String team = result.getString("PLAYER");
+
+                players.add(team);
+
+                result.next();
+
+                players.remove("NONE");
+                players.remove(player.getName());
+
+                if (players.isEmpty()) {
+                    return  null;
+                }
+
+            }
+        }
+        return players.toString().replace("[", "").replace("]", "");
     }
 
     public static List<String> getPlayerbyTeamID(int id) throws SQLException {

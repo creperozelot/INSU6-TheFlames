@@ -11,6 +11,9 @@ import INSU.creperozelot.tasks.WaitingForHost;
 import INSU.creperozelot.utils.MYSQL;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 
 public final class main extends JavaPlugin {
@@ -52,6 +55,13 @@ public final class main extends JavaPlugin {
         MYSQL.keepalive();
         StaticCache.Task_WaitingforHost_id = WaitingForHost.run();
 
+        //create directory
+        try {
+            Files.createDirectories(Paths.get(main.getInstance().getDataFolder().getAbsolutePath() + "/data/teamchest"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         if (!main.getInstance().getConfig().getBoolean("main.started")) {
             StaticCache.bossbarmsg = StaticCache.prefix + "§6Warten auf Start...";
         }
@@ -83,6 +93,7 @@ public final class main extends JavaPlugin {
         this.getCommand("mute").setExecutor(new CommandMute());
         this.getCommand("unmute").setExecutor(new CommandUnmute());
         this.getCommand("dbreconnect").setExecutor(new CommandDBReconnect());
+        this.getCommand("teamchest").setExecutor(new CommandTeamchest());
     }
 
     private void registerListener() {
@@ -97,5 +108,6 @@ public final class main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ItemPickupListener(), this);
         getServer().getPluginManager().registerEvents(new FriendlyFire(), this);
         getServer().getPluginManager().registerEvents(new PlayerMoveListener(), this);
+        getServer().getPluginManager().registerEvents(new TeamchestCloseEvent(), this);
     }
 }

@@ -55,5 +55,6 @@ commands:
     description: Startet die Datenbank Verbindung neu!
     permission: insu.admin.start
     permission-message: §cDu hast keine Berechtigung dafür!
-
+  teamchest:
+    description: Öffnet die Teamchest!
 

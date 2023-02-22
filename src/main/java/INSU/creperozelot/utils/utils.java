@@ -11,10 +11,17 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -88,6 +95,28 @@ public class utils {
         int randomaplyer = utils.random(0, players.size());
 
         return Bukkit.getPlayer(players.get(randomaplyer));
+    }
+
+    //TEAMCHEST INV
+
+    public static void openTeamChest(int teamid, HumanEntity ent) throws IOException {
+        File file = new File(main.getInstance().getDataFolder().getAbsolutePath() + "/data/teamchest", "teamchest_" + teamid + ".yml");
+        Inventory inv = Bukkit.createInventory(null, 27, "Teamchest " + teamid);
+        if (file.exists()) {
+            FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);
+            ItemStack[] content = ((List<ItemStack>) configuration.get("inventory.content")).toArray(new ItemStack[0]);
+            inv.setContents(content);
+            ent.openInventory(inv);
+        } else {
+            file.createNewFile();
+            ItemStack inititem = new ItemStack(Material.DIRT);
+            inititem.setAmount(1);
+            inv.addItem(inititem);
+            FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);
+            configuration.set("inventory.content", inv.getContents());
+            configuration.save(file);
+            ent.sendMessage(StaticCache.prefix + "§aDeine Teamchest wurde erstellt, führe den befehlt erneut aus um sie zu öffnen!");
+        }
     }
 
     public static void eventanimation(String eventname, String eventname1, String eventname2, String eventname3, String eventname4, String eventname5, String eventname6) {
