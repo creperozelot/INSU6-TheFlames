@@ -144,7 +144,7 @@ public class startsys {
         int Airplane_start_z = main.getInstance().getConfig().getInt("story.airplane.start.z");
 
         for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
-            Location airplane_start = new Location(AllOnlinePlayers.getWorld(), Airplane_start_x, Airplane_start_y, Airplane_start_z);
+            Location airplane_start = new Location(Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")), Airplane_start_x, Airplane_start_y, Airplane_start_z);
             //add effect
             AllOnlinePlayers.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999, 250, false, false));
             AllOnlinePlayers.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 999999, 250, false, false));
@@ -154,7 +154,7 @@ public class startsys {
 
             //Start Story
 
-            AllOnlinePlayers.playSound(AllOnlinePlayers.getLocation(), Sound.ENTITY_GHAST_DEATH, 100, 0);
+            AllOnlinePlayers.playSound(AllOnlinePlayers.getLocation(), Sound.ENTITY_BLAZE_DEATH, 100, 0);
 
         }
 
@@ -176,7 +176,7 @@ public class startsys {
                     AllOnlinePlayers.teleport(new Location (AllOnlinePlayers.getWorld(), Airplane_inair_x, Airplane_inair_y, Airplane_inair_z));
                 }
             }
-        }.runTaskLater(main.getInstance(), 20 * 30);
+        }.runTaskLater(main.getInstance(), 20 * 25);
 
         new BukkitRunnable() {
             @Override

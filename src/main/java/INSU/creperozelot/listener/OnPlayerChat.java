@@ -34,7 +34,7 @@ public class OnPlayerChat implements Listener {
             if (MYSQL.isGameMaster(player.getName())) {
                 event.setFormat(MYSQL.getTeambyName(player.getName()) + " §8|§e " + player.getName() + " §7»§6 " + event.getMessage());
             } else {
-                event.setFormat("§e" + player.getName() + " §7»§f " + event.getMessage());
+                event.setFormat("§f"  + MYSQL.getTeambyName(player.getName()) + " §8|§7 " + player.getName() + " §7»§f " + event.getMessage());
             }
         }
     }

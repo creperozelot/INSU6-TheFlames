@@ -1,17 +1,18 @@
 main:
   main: 'creperozelot'
   map: "world"
-  prefix: '§e§lIN§6§lSU §f§l6 §r§7|§6 '
+  prefix: '§e§lIN§6§lSU §r§7|§6 '
   countdown:
     minutes: 5
   maintenance: true
-  spawncoords:
-    x: 0
-    z: 0
+  lobbyspawncoords:
+    x: 9534
+    y: 98
+    z: 9447
   #DO NOT TOUCH BEGIN-----------------------------------------------------------
   started: false
-  #DO NOT TOUCH END-----------------------------------------------------------
-  autorunevents: false
+  #DO NOT TOUCH END-------------------------------------------------------------
+  autorunevents: false #BETA | DEFAULT: DISABLED
 
 messages:
   errconsolerun: '§cDu kannst diese Command nur als Spieler ausführen!'

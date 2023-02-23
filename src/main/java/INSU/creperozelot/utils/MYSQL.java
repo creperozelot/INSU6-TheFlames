@@ -293,7 +293,7 @@ public class MYSQL {
         return players;
     }
 
-    public static String getTeammatebyPlayer(Player player) throws SQLException {
+    public static List<String> getTeammateNamesbyPlayer(Player player) throws SQLException {
         Statement stmt = con.createStatement();
 
         ResultSet result = stmt.executeQuery("SELECT * FROM `INSU` WHERE `ID`='" + MYSQL.getIDbyName(player.getName()) + "';");
@@ -312,16 +312,18 @@ public class MYSQL {
 
                 result.next();
 
-                players.remove("NONE");
-                players.remove(player.getName());
+                    if (players.contains("NONE")) {
+                        players.remove("NONE");
+                    }
 
-                if (players.isEmpty()) {
-                    return  null;
-                }
+                    if (players.contains(player.getName())) {
+                        players.remove(player.getName());
+                    }
+
 
             }
         }
-        return players.toString().replace("[", "").replace("]", "");
+        return players;
     }
 
     public static List<String> getPlayerbyTeamID(int id) throws SQLException {

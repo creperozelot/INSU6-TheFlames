@@ -62,6 +62,7 @@ public class botlogic {
 
         TextChannel channel = StaticCache.jda.getTextChannelById(channelid);
 
+        assert channel != null;
         channel.sendMessageEmbeds(embed).queue();
 
 

@@ -1,8 +1,11 @@
 package INSU.creperozelot.listener;
 
 import INSU.creperozelot.StaticCache;
+import INSU.creperozelot.dc.bot.botlogic;
 import INSU.creperozelot.main;
 import INSU.creperozelot.utils.MYSQL;
+import INSU.creperozelot.utils.utils;
+import net.dv8tion.jda.api.EmbedBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -27,8 +30,10 @@ public class PlayerJoinListener implements Listener {
             event.getPlayer().kickPlayer("§c§lFehler: \n §cINSU Startet gerade, bitte warte kurz und versuche es nach dem Start erneut.");
         } else if (!main.getInstance().getConfig().getBoolean("main.maintenance") || MYSQL.isGameMaster(event.getPlayer().getName())) {
             if (!MYSQL.isStarted(event.getPlayer().getName()) && main.getInstance().getConfig().getBoolean("main.started")) {
-                event.getPlayer().teleport(new Location(Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")), 1, 1, 1));
+                event.getPlayer().teleport(utils.generateStartupLocation());
                 MYSQL.setStarted(event.getPlayer().getName(), "true");
+            } else if (!MYSQL.isStarted(event.getPlayer().getName()) && !main.getInstance().getConfig().getBoolean("main.started")) {
+                event.getPlayer().teleport(new Location(Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")), main.getInstance().getConfig().getInt("main.lobbyspawncoords.x"), main.getInstance().getConfig().getInt("main.lobbyspawncoords.y"), main.getInstance().getConfig().getInt("main.lobbyspawncoords.z")));
             }
 
             Player player = event.getPlayer();
@@ -38,9 +43,15 @@ public class PlayerJoinListener implements Listener {
             event.setJoinMessage(StaticCache.prefix + "Der Spieler §e" + player.getDisplayName() + "§6 ist dem Projekt Beigetreten.");
             player.sendMessage(StaticCache.prefix + "§cBEACHTE! Alles was du sagst wird geloggt! Wähle deine Worte weise.");
             player.sendMessage(StaticCache.prefix + "Es sind §e" + OnlinePlayers + "§f Spieler §aOnline...");
-            player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 15, 255, false, false, Color.BLACK), false);
+            player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 15, 255, false, false, Color.BLACK), false);
             player.sendTitle("§6Achtung...", "§cDu bist für 15 Skunden nicht Verwundbar", 0, 80, 20);
             player.sendMessage(StaticCache.prefix + "§aDu bist im Team §6" + MYSQL.getTeambyName(player.getName()));
+
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setTitle("Server Beitrit");
+            eb.setDescription("Der Spieler **" + player.getName() + "** ist dem INSU Server beigetreten!");
+            eb.setColor(java.awt.Color.GREEN);
+            botlogic.sendEmbedMessage(eb.build(), "732648259599728661");
 
             //players stuff
             Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "title " + player.getName() + " timings 10 60 10");
@@ -51,8 +62,8 @@ public class PlayerJoinListener implements Listener {
                 player.setCustomName("§e§lGamemaster §r§8|§r§f " + player.getName());
             } else {
                 String teamname = MYSQL.getTeambyName(player.getName());
-                player.setDisplayName("§6" + teamname + " §8§r|§f " + player.getName());
-                player.setCustomName("§6" + teamname + " §8§r|§f " + player.getName());
+                player.setDisplayName("§f" + teamname + " §8§r|§f " + player.getName());
+                player.setCustomName("§f" + teamname + " §8§r|§f " + player.getName());
             }
 
             if (!MYSQL.PlayerExist(player.getName())) {

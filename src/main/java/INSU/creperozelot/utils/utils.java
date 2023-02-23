@@ -115,10 +115,20 @@ public class utils {
             FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);
             configuration.set("inventory.content", inv.getContents());
             configuration.save(file);
+            inv.removeItem(inititem);
+            configuration.set("inventory.content", inv.getContents());
+            configuration.save(file);
             ent.sendMessage(StaticCache.prefix + "§aDeine Teamchest wurde erstellt, führe den befehlt erneut aus um sie zu öffnen!");
         }
     }
 
+
+    public static Location generateStartupLocation() {
+        int ran_x = random(-277, 277);
+        int ran_z = random(-297, 80);
+        int ran_y = Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")).getHighestBlockYAt(ran_x, ran_z);
+        return new Location(Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")), ran_x, ran_y, ran_z);
+    }
     public static void eventanimation(String eventname, String eventname1, String eventname2, String eventname3, String eventname4, String eventname5, String eventname6) {
         broadcastTitle("§6§le", eventname1, 10, 10, 0);
         broadcastSound(Sound.BLOCK_NOTE_BASS);
