@@ -4,11 +4,13 @@ import INSU.creperozelot.StaticCache;
 import INSU.creperozelot.main;
 import INSU.creperozelot.utils.utils;
 import org.bukkit.Bukkit;
+import org.bukkit.Effect;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,16 +26,16 @@ public class RandomEffekt {
             }
         }.runTaskLater(main.getInstance(), 20 * 120);
 
-        List<PotionEffectType> effects = Arrays.asList(PotionEffectType.values());
+        List<PotionEffectType> effects = new ArrayList<>(Arrays.asList(PotionEffectType.values()));
+        List<PotionEffectType> removeeffects = new ArrayList<>();
+        removeeffects.add(PotionEffectType.REGENERATION);
+        removeeffects.add(PotionEffectType.FIRE_RESISTANCE);
+        removeeffects.add(PotionEffectType.DAMAGE_RESISTANCE);
+        removeeffects.add(PotionEffectType.INVISIBILITY);
+        removeeffects.add(PotionEffectType.WITHER);
+        removeeffects.add(PotionEffectType.INCREASE_DAMAGE);
+        effects.removeAll(removeeffects);
         System.out.println(effects);
-        effects.remove(PotionEffectType.WITHER);
-        effects.remove(PotionEffectType.REGENERATION);
-        effects.remove(PotionEffectType.HEALTH_BOOST);
-        effects.remove(PotionEffectType.DAMAGE_RESISTANCE);
-        effects.remove(PotionEffectType.FIRE_RESISTANCE);
-        effects.remove(PotionEffectType.INVISIBILITY);
-        effects.remove(PotionEffectType.getByName("strength"));
-        effects.remove(PotionEffectType.getByName("instant_damage"));
 
         for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
             int randompotion = utils.random(0, effects.size());
