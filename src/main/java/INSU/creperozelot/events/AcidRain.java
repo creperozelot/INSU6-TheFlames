@@ -24,6 +24,7 @@ public class AcidRain {
             @Override
             public void run() {
                 StaticCache.eventrunning = false;
+                StaticCache.bossBar.setTitle(StaticCache.bossbarmsg);
             }
         }.runTaskLater(main.getInstance(), 20L * 120L);
 

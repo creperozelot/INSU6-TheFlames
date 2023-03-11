@@ -15,6 +15,8 @@ public class PlayerLeaveListener implements Listener {
         StaticCache.bossBar.removePlayer(player);
         event.setQuitMessage(StaticCache.prefix + "Der Spieler §e" + player.getDisplayName() + "§6 hat das Projekt verlassen.");
 
+        StaticCache.onlineplayerlist.remove(player.getName());
+
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle("Server Leave");
         eb.setDescription("Der Spieler **" + player.getName() + "** hat den INSU Server verlassen!");

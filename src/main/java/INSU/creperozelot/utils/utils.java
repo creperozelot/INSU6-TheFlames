@@ -6,10 +6,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -82,7 +79,25 @@ public class utils {
 
     public static void broadcastSound(Sound sound) {
         for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
-            AllOnlinePlayers.playSound(AllOnlinePlayers.getLocation(), sound, 100, 0);
+            AllOnlinePlayers.playSound(AllOnlinePlayers.getLocation(), sound, 1.0f, 1.0f);
+        }
+    }
+
+    public static void broadcastSound(String sound, SoundCategory soundCategory) {
+        for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
+            AllOnlinePlayers.playSound(AllOnlinePlayers.getLocation(), sound, soundCategory, 1.0f, 1.0f);
+        }
+    }
+
+    public static void broadcastSound(String sound) {
+        for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
+            AllOnlinePlayers.playSound(AllOnlinePlayers.getLocation(), sound, 1.0f, 1.0f);
+        }
+    }
+
+    public static void broadcastSound(Sound sound, SoundCategory soundCategory) {
+        for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
+            AllOnlinePlayers.playSound(AllOnlinePlayers.getLocation(), sound, soundCategory, 1.0f, 1.0f);
         }
     }
 
@@ -109,8 +124,8 @@ public class utils {
             ent.openInventory(inv);
         } else {
             file.createNewFile();
-            ItemStack inititem = new ItemStack(Material.DIRT);
-            inititem.setAmount(1);
+            ItemStack inititem = new ItemStack(Material.SUGAR_CANE);
+            inititem.setAmount(64);
             inv.addItem(inititem);
             FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);
             configuration.set("inventory.content", inv.getContents());
@@ -122,6 +137,13 @@ public class utils {
         }
     }
 
+    public static void deleteTeamChest(int teamid) {
+        File file = new File(main.getInstance().getDataFolder().getAbsolutePath() + "/data/teamchest", "teamchest_" + teamid + ".yml");
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+
 
     public static Location generateStartupLocation() {
         int ran_x = random(-277, 277);
@@ -129,10 +151,10 @@ public class utils {
         int ran_y = Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")).getHighestBlockYAt(ran_x, ran_z);
         return new Location(Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")), ran_x, ran_y, ran_z);
     }
-    public static void eventanimation(String eventname, String eventname1, String eventname2, String eventname3, String eventname4, String eventname5, String eventname6) {
+    public static int eventanimation(String eventname, String eventname1, String eventname2, String eventname3, String eventname4, String eventname5, String eventname6) {
         broadcastTitle("§6§le", eventname1, 10, 10, 0);
         broadcastSound(Sound.BLOCK_NOTE_BASS);
-        StaticCache.bossBar.setTitle(StaticCache.prefix + "§cEvent §a" + eventname + " §cstatet...");
+        StaticCache.bossBar.setTitle(StaticCache.prefix + "§cEvent §a" + eventname + " §cStartet...");
 
 
         (new BukkitRunnable() {
@@ -181,5 +203,6 @@ public class utils {
             }
         }).runTaskLater((Plugin) main.getInstance(), 70L);
 
+        return 100;
     }
 }

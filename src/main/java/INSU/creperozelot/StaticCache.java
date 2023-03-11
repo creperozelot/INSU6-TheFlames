@@ -39,6 +39,8 @@ public class StaticCache {
 
     public static List<String> muted_players = new ArrayList<String>();
 
+    public static List<String> onlineplayerlist = new ArrayList<String>();
+
     public static String consoleerr = main.getInstance().getConfig().getString("messages.errconsolerun");
 
     //Task IDS

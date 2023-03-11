@@ -77,6 +77,11 @@ public class MYSQL {
         }
     }
 
+    public static void delete(String playername) throws SQLException {
+        Statement stmt = con.createStatement();
+        stmt.execute("DELETE FROM INSU WHERE PLAYER='" + playername + "';");
+    }
+
     public static boolean arePlayersinTeams(String player1, String player2) throws SQLException {
         boolean bol = false;
 
@@ -372,6 +377,31 @@ public class MYSQL {
         } else {
             return "**No team**";
         }
+    }
+
+    public static int getStrikes(String playername) {
+        try {
+            Statement stmt = con.createStatement();
+
+            ResultSet result = stmt.executeQuery("SELECT STRIKES FROM `INSU` WHERE PLAYER='" + playername + "';");
+
+            result.first();
+
+            int strikes = result.getInt("STRIKES");
+
+
+            return strikes;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -404;
+        }
+    }
+
+    public static void addStrike(String playername) throws SQLException {
+        Statement stmt = con.createStatement();
+        int strikes = MYSQL.getStrikes(playername) + 1;
+        stmt.execute("UPDATE `INSU` SET `STRIKES`='" + strikes + "' WHERE `PLAYER`='" + playername + "';");
     }
 
     public static int getTeamIDbyName(String playername) throws SQLException {

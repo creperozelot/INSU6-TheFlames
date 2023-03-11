@@ -59,6 +59,7 @@ public class FindTheItem implements Listener {
             @Override
             public void run() {
                 StaticCache.eventrunning = false;
+                StaticCache.bossBar.setTitle(StaticCache.bossbarmsg);
             }
         }.runTaskLater(main.getInstance(),20 * 120);
 

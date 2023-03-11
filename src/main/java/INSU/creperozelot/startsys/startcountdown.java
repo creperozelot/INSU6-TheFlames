@@ -2,31 +2,27 @@ package INSU.creperozelot.startsys;
 
 import INSU.creperozelot.StaticCache;
 import INSU.creperozelot.main;
-import INSU.creperozelot.utils.MYSQL;
 import INSU.creperozelot.utils.utils;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
+import org.bukkit.SoundCategory;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
-public class startsys {
+public class startcountdown {
     static int countdown_sec = 60 * main.getInstance().getConfig().getInt("main.countdown.minutes");
 
     static int countdown_s = 0;
 
     static int countdown_min = main.getInstance().getConfig().getInt("main.countdown.minutes") + 1;
-    public static void countdown() {
+    public static void run() {
 
-
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                utils.broadcastSound("story.announcment.prestart", SoundCategory.VOICE);
+            }
+        }.runTaskLater(main.getInstance(), 20 * 5);
 
         new BukkitRunnable() {
             @Override
@@ -43,7 +39,7 @@ public class startsys {
              public void run() {
                  utils.broadcastActionbar("§e§lIN§6§lSU§r§a§l Startet in §2§l" + countdown_sec + "§a§l Sekunden...");
 
-                 if (countdown_sec == 300 || countdown_sec == 240 || countdown_sec == 180 || countdown_sec == 120 || countdown_sec == 60) {
+                 if (countdown_sec == 1200 || countdown_sec == 600 || countdown_sec == 300 || countdown_sec == 240 || countdown_sec == 180 || countdown_sec == 120 || countdown_sec == 60) {
                      Bukkit.broadcastMessage(StaticCache.prefix + "Start in §f" + countdown_min + "§6 Minuten...");
                  }
 
@@ -53,11 +49,7 @@ public class startsys {
                  }
 
                  if (countdown_sec == 0) {
-                     try {
-                         startsys.initStory();
-                     } catch (SQLException e) {
-                         throw new RuntimeException(e);
-                     }
+                     story.run();
                      cancel();
                  }
 
@@ -67,6 +59,9 @@ public class startsys {
          }.runTaskTimer(main.getInstance(),0, 20);
     }
 
+
+
+    /*
     public static void Countdown_insustart() throws SQLException {
         countdown_s = 30;
 
@@ -149,7 +144,7 @@ public class startsys {
             AllOnlinePlayers.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999, 250, false, false));
             AllOnlinePlayers.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 999999, 250, false, false));
 
-            //teleport players to airplane
+            //teleport plµayers to airplane
             AllOnlinePlayers.teleport(airplane_start);
 
             //Start Story
@@ -211,5 +206,6 @@ public class startsys {
 
 
     }
+     */
 
 }

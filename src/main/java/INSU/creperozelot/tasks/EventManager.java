@@ -46,6 +46,9 @@ public class EventManager {
                             case 9:
                                 WeitEntfernt.run();
                                 break;
+                            case 10:
+                                Lootdrop.run();
+                                break;
                             default:
                                 break;
                         }

@@ -12,6 +12,6 @@ public class Kaktuse {
     public static int runned = 10;
 
     public static void run() {
-        utils.broadcastTitle("§cErr...", "§c->sendMessage('PHP Error CODE: Verarscht');", 0, 100, 20);
+        utils.broadcastTitle("§cErr...", "$c->sendMessage('PHP Error CODE: Verarscht');", 0, 100, 20);
     }
 }

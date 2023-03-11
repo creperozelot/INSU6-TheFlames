@@ -9,11 +9,13 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -26,8 +28,10 @@ public class PlayerJoinListener implements Listener {
 
         if (!MYSQL.isConnected()) {
             event.getPlayer().kickPlayer("§c§lSystemfehler: \n §r§cDatenbank nicht verbunden!");
+            event.setJoinMessage("");
         } else if (StaticCache.storyrunning) {
             event.getPlayer().kickPlayer("§c§lFehler: \n §cINSU Startet gerade, bitte warte kurz und versuche es nach dem Start erneut.");
+            event.setJoinMessage("");
         } else if (!main.getInstance().getConfig().getBoolean("main.maintenance") || MYSQL.isGameMaster(event.getPlayer().getName())) {
             if (!MYSQL.isStarted(event.getPlayer().getName()) && main.getInstance().getConfig().getBoolean("main.started")) {
                 event.getPlayer().teleport(utils.generateStartupLocation());
@@ -44,7 +48,7 @@ public class PlayerJoinListener implements Listener {
             player.sendMessage(StaticCache.prefix + "§cBEACHTE! Alles was du sagst wird geloggt! Wähle deine Worte weise.");
             player.sendMessage(StaticCache.prefix + "Es sind §e" + OnlinePlayers + "§f Spieler §aOnline...");
             player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 15, 255, false, false, Color.BLACK), false);
-            player.sendTitle("§6Achtung...", "§cDu bist für 15 Skunden nicht Verwundbar", 0, 80, 20);
+            player.sendTitle("§cInformation...", "§cDu bist für 15 Skunden nicht Verwundbar", 0, 80, 20);
             player.sendMessage(StaticCache.prefix + "§aDu bist im Team §6" + MYSQL.getTeambyName(player.getName()));
 
             EmbedBuilder eb = new EmbedBuilder();
@@ -54,8 +58,9 @@ public class PlayerJoinListener implements Listener {
             botlogic.sendEmbedMessage(eb.build(), "732648259599728661");
 
             //players stuff
-            Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "title " + player.getName() + " timings 10 60 10");
-
+            if (!StaticCache.onlineplayerlist.contains(player.getName())) {
+                StaticCache.onlineplayerlist.add(player.getName());
+            }
 
             if (MYSQL.isGameMaster(player.getName())) {
                 player.setDisplayName("§e§lGamemaster §r§8|§r§f " + player.getName());

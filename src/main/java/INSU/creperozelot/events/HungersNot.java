@@ -15,12 +15,13 @@ public class HungersNot {
 
             StaticCache.eventrunning = true;
 
-            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), new BukkitRunnable() {
+            new BukkitRunnable() {
                 @Override
                 public void run() {
+                    StaticCache.bossBar.setTitle(StaticCache.bossbarmsg);
                     StaticCache.eventrunning = false;
                 }
-            }, 20 * 120);
+            }.runTaskLater(main.getInstance(),20 * 120);
 
             AllOnlinePlayer.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 180, 2));
         }

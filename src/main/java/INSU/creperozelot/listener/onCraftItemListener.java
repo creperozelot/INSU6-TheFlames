@@ -17,14 +17,8 @@ public class onCraftItemListener implements Listener {
             Player player = (Player) humanEntity;
             switch (item.getType()) {
                 case FISHING_ROD: // Fishing_rod
-                    event.setCancelled(true);
-                    player.sendMessage(StaticCache.prefix + "§cDu kannst dieses Item nicht Craften!");
-                    break;
                 case BEETROOT_SOUP: //soup
-                    event.setCancelled(true);
-                    player.sendMessage(StaticCache.prefix + "§cDu kannst dieses Item nicht Craften!");
-                    break;
-                case MUSHROOM_SOUP: //soup
+                case MUSHROOM_SOUP:
                     event.setCancelled(true);
                     player.sendMessage(StaticCache.prefix + "§cDu kannst dieses Item nicht Craften!");
                     break;

@@ -57,4 +57,24 @@ commands:
     permission-message: §cDu hast keine Berechtigung dafür!
   teamchest:
     description: Öffnet die Teamchest!
+  tpup:
+    description: Tpt alle Spieler nach oben!
+    permission: insu.admin.start
+    permission-message: §cDu hast keine Berechtigung dafür!
+  dev_soundtest:
+    description: Sound Test
+    permission: insu.admin.start
+    permission-message: §cDu hast keine Berechtigung dafür!
+  strike:
+    description: Strike befehl um Spieler zu bestraffen!
+    permission: insu.admin.start
+    permission-message: §cDu hast keine Berechtigung dafür!
+  forcestart:
+    description: Startet das Projekt SOFORT!
+    permission: insu.admin.start
+    permission-message: §cDu hast keine Berechtigung dafür!
+  dev_cforcestart:
+    description: Startet das Projekt unabhängig davon ob der start true oder false ist.
+    permission: insu.admin.start
+    permission-message: §cDu hast keine Berechtigung dafür!
 

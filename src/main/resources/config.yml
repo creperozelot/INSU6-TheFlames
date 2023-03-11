@@ -1,9 +1,12 @@
 main:
   main: 'creperozelot'
   map: "world"
+  kicktime:
+    hours: 20
+    minutes: 30
   prefix: '§e§lIN§6§lSU §r§7|§6 '
   countdown:
-    minutes: 5
+    minutes: 15
   maintenance: true
   lobbyspawncoords:
     x: 9534
@@ -15,6 +18,7 @@ main:
   autorunevents: false #BETA | DEFAULT: DISABLED
 
 messages:
+  endtime: '§c§lVorbei:\n§r§cDie Zeit zum Spielen ist für heute Vorbei!'
   errconsolerun: '§cDu kannst diese Command nur als Spieler ausführen!'
   death:
     entity_attack: '{player} ist an {entity} auf bodenloser Art und Weise gekillt worden!'
@@ -47,15 +51,12 @@ messages:
     others: '{player} ist jetzt in einer anderen Welt :('
 #schema: question;answer
 questions:
-  - Wer hat INSU 1 Gewonnen?;Raichu
-  - Wer ist der Gründer von INSU (Nur einer ist Richtig (Inagemname)?;ToadenationNr1
-  - Wie heißt Obama mit ganzem Namen?;Barack Hussein Obama
-  - Wie alt ist die Queen zirka geworden?;96
-  - Wie heißt ein helles Mammut?;Hellmut
-  - was macht man mit einem Hund ohne Beine?;Um die Häuser ziehen
-  - Wo kauft man 53 Melonen?;Im Mathebuch
-  - Wann gehen U-Boote unter?;Tag der offenen Türe
-
+  - Was schrie Flame in INSU 4 während er in die Höhle an Tag 2 fiel?;NEIN
+  - Wann war das erste INSU (bitte nur das Jahr)?;2020
+  - Wer war der Gamemaster in INSU 1 (Kompletter Username Stand:2020)?;Toadenation
+  - Wer hat mit ItsRazorPvP INSU 2 gewonnen (Kompletter Username Stand:2021)?;RealSertrix
+  - Wer ist der Developer von INSU Staffel 6 (Kompletter Username)?;creperozelot
+  - Wofür steht die Abkürzung INSU?;Insel Survival
 story:
   airplane:
     start:

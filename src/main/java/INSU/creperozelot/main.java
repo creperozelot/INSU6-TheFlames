@@ -1,10 +1,12 @@
 package INSU.creperozelot;
 
 import INSU.creperozelot.commands.*;
+import INSU.creperozelot.commands.strike.StrikeMaincommand;
 import INSU.creperozelot.dc.bot.botlogic;
 import INSU.creperozelot.events.FindTheItem;
 import INSU.creperozelot.events.InsuQuiz;
 import INSU.creperozelot.listener.*;
+import INSU.creperozelot.tasks.AutoKick;
 import INSU.creperozelot.tasks.EventManager;
 import INSU.creperozelot.tasks.LiveDisplayTask;
 import INSU.creperozelot.tasks.WaitingForHost;
@@ -45,12 +47,13 @@ public final class main extends JavaPlugin {
         if  (main.getInstance().getConfig().getBoolean("main.started")) EventManager.runEventManager();
         if (main.getInstance().getConfig().getBoolean("main.started")) LiveDisplayTask.run();
         InfoMessage.deathInfo();
+        AutoKick.run();
         //Bot startup logic
         botlogic.createBot();
         //MYSQL
         if  (!MYSQL.isConnected()) {
             MYSQL.connect();
-            MYSQL.update("CREATE TABLE IF NOT EXISTS INSU(PLAYER varchar(64), DEATH int, ID int, TEAM varchar(64), ISGAMEMASTER varchar(32), STARTED varchar(32));");
+            MYSQL.update("CREATE TABLE IF NOT EXISTS INSU(PLAYER varchar(64), KILLS int, STRIKES int, DEATH int, ID int, TEAM varchar(64), ISGAMEMASTER varchar(32), STARTED varchar(32));");
         }
         MYSQL.keepalive();
         StaticCache.Task_WaitingforHost_id = WaitingForHost.run();
@@ -94,6 +97,11 @@ public final class main extends JavaPlugin {
         this.getCommand("unmute").setExecutor(new CommandUnmute());
         this.getCommand("dbreconnect").setExecutor(new CommandDBReconnect());
         this.getCommand("teamchest").setExecutor(new CommandTeamchest());
+        this.getCommand("tpup").setExecutor(new CommandTPUP());
+        this.getCommand("dev_soundtest").setExecutor(new CommandsDevSoundTest());
+        this.getCommand("strike").setExecutor(new StrikeMaincommand());
+        this.getCommand("forcestart").setExecutor(new CommandForceStart());
+        this.getCommand("dev_cforcestart").setExecutor(new CommandDevForceStartCountdown());
     }
 
     private void registerListener() {

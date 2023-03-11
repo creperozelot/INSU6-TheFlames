@@ -24,7 +24,7 @@ public class CommandApply {
 
                     eb.setTitle("Angenommen | Bewerbungs Status");
 
-                    eb.setDescription("**Herzlichen Glückwunsch** \n Du " + dcname.getAsMention() + " **(" + sender + ")** und dein Teampartner **" + partner + "** wurden bei INSU Staffel 6 angenommen! \n\n Bitte denk dran noch niemanden zu erzählen, dass du mit deinen jeweiligen Teampartner-Teams, weil wir dies bis zur Veröffentlichung (18.03.23) **__nicht bekannt haben möchten!__** Bitte schicke zudem **__Toadenation#3561__** deinen und den Skin von deinem Teampartner über die Privatnachrichten Funktion von Discord (PN), weil Toad dies für den Content Bereich von INSU braucht.\n **__Bei Fragen bitte ich diese in dem Teilnehmer Chat von INSU stellen!__** \n\n **PS: Du und dein Teampartner müssten auf dem INSU Discord jetzt den Teilnehmer Rang haben!**");
+                    eb.setDescription("**Herzlichen Glückwunsch** \n Du " + dcname.getAsMention() + " **(" + sender + ")** und dein Teampartner **" + partner + "** wurden bei INSU Staffel 6 angenommen! \n\n Bitte denk dran noch niemanden zu erzählen, dass du mit deinen jeweiligen Teampartner-Teams, weil wir dies bis zur Veröffentlichung (18.03.23) **__nicht bekannt haben möchten!__** Bitte schicke zudem **__ᦔRollyLP#1700__** deinen und den Skin von deinem Teampartner über die Privatnachrichten Funktion von Discord (PN), weil Toad dies für den Content Bereich von INSU braucht.\n **__Bei Fragen bitte ich diese in dem Teilnehmer Chat von INSU stellen!__** \n\n **PS: Du und dein Teampartner müssten auf dem INSU Discord jetzt den Teilnehmer Rang haben!**");
 
                     eb.setTimestamp(LocalDateTime.now());
 
@@ -38,7 +38,7 @@ public class CommandApply {
 
                     eb6.setTitle("Angenommen | Bewerbungs Status");
 
-                    eb6.setDescription("**Herzlichen Glückwunsch** \n Du " + dcnamepartner.getAsMention() + " **(" + partner + ")** und dein Teampartner **" + sender + "** wurden bei INSU Staffel 6 angenommen! \n\n Bitte denk dran noch niemanden zu erzählen, dass du mit deinen jeweiligen Teampartner-Teams, weil wir dies bis zur Veröffentlichung (18.03.23) **__nicht bekannt haben möchten!__** Bitte schicke zudem **__Toadenation#3561__** deinen und den Skin von deinem Teampartner über die Privatnachrichten Funktion von Discord (PN), weil Toad dies für den Content Bereich von INSU braucht.\n **__Bei Fragen bitte ich diese in dem Teilnehmer Chat von INSU stellen!__** \n\n **PS: Du und dein Teampartner müssten auf dem INSU Discord jetzt den Teilnehmer Rang haben!**");
+                    eb6.setDescription("**Herzlichen Glückwunsch** \n Du " + dcnamepartner.getAsMention() + " **(" + partner + ")** und dein Teampartner **" + sender + "** wurden bei INSU Staffel 6 angenommen! \n\n Bitte denk dran noch niemanden zu erzählen, dass du mit deinen jeweiligen Teampartner-Teams, weil wir dies bis zur Veröffentlichung (18.03.23) **__nicht bekannt haben möchten!__** Bitte schicke zudem **__ᦔRollyLP#1700__** deinen und den Skin von deinem Teampartner über die Privatnachrichten Funktion von Discord (PN), weil Toad dies für den Content Bereich von INSU braucht.\n **__Bei Fragen bitte ich diese in dem Teilnehmer Chat von INSU stellen!__** \n\n **PS: Du und dein Teampartner müssten auf dem INSU Discord jetzt den Teilnehmer Rang haben!**");
 
                     eb6.setTimestamp(LocalDateTime.now());
 
