@@ -22,5 +22,6 @@ public class PlayerLeaveListener implements Listener {
         eb.setDescription("Der Spieler **" + player.getName() + "** hat den INSU Server verlassen!");
         eb.setColor(java.awt.Color.RED);
         botlogic.sendEmbedMessage(eb.build(), "732648259599728661");
+        botlogic.sendEmbedMessage(eb.build(), "984755892794843206");
     }
 }

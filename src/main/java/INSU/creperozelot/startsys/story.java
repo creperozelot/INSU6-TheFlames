@@ -4,6 +4,7 @@ import INSU.creperozelot.StaticCache;
 import INSU.creperozelot.main;
 import INSU.creperozelot.utils.utils;
 import org.bukkit.Bukkit;
+import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
@@ -24,12 +25,13 @@ public class story {
         int Airplane_inair_z = main.getInstance().getConfig().getInt("story.airplane.inair.z");
         String sound_pilotspeak = "story.announcment.pilot";
         String sound_main_story = "story.announcment.main";
+        Location airplane_start = new Location(Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")), Airplane_start_x, Airplane_start_y, Airplane_start_z);
 
         for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
-            Location airplane_start = new Location(Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")), Airplane_start_x, Airplane_start_y, Airplane_start_z);
-            //add effect
             AllOnlinePlayers.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999, 250, false, false));
+        }
 
+        for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
             AllOnlinePlayers.teleport(airplane_start);
         }
 
@@ -45,7 +47,7 @@ public class story {
                     AllOnlinePlayers.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 10, 5, true, false));
                 }
             }
-        }.runTaskLater(main.getInstance(), 20 * 23);
+        }.runTaskLater(main.getInstance(), 20 * 21);
 
         new BukkitRunnable() {
             @Override
@@ -76,7 +78,7 @@ public class story {
             public void run() {
 
                 for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
-                    AllOnlinePlayers.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 10, 250, false, false));
+                    AllOnlinePlayers.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 50, 250, false, false));
                 }
 
             }

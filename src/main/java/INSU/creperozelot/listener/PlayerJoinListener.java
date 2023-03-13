@@ -32,6 +32,10 @@ public class PlayerJoinListener implements Listener {
         } else if (StaticCache.storyrunning) {
             event.getPlayer().kickPlayer("§c§lFehler: \n §cINSU Startet gerade, bitte warte kurz und versuche es nach dem Start erneut.");
             event.setJoinMessage("");
+        } else if (MYSQL.getDeath(event.getPlayer().getName()) != 0) {
+            event.getPlayer().kickPlayer("§c§lFehler: \n §r§cDu bist aus INSU ausgeschieden!");
+        } else if (!main.getInstance().getConfig().getBoolean("intime") && !MYSQL.isGameMaster(event.getPlayer().getName())) {
+            event.getPlayer().kickPlayer("§c§lFehler: \n §r§cDas Projekt läuft zwischen " + main.getInstance().getConfig().getString("main.playtime") + "§c Uhr und " + main.getInstance().getConfig().getString("main.kicktime") + "§c Uhr.");
         } else if (!main.getInstance().getConfig().getBoolean("main.maintenance") || MYSQL.isGameMaster(event.getPlayer().getName())) {
             if (!MYSQL.isStarted(event.getPlayer().getName()) && main.getInstance().getConfig().getBoolean("main.started")) {
                 event.getPlayer().teleport(utils.generateStartupLocation());
@@ -56,6 +60,7 @@ public class PlayerJoinListener implements Listener {
             eb.setDescription("Der Spieler **" + player.getName() + "** ist dem INSU Server beigetreten!");
             eb.setColor(java.awt.Color.GREEN);
             botlogic.sendEmbedMessage(eb.build(), "732648259599728661");
+            botlogic.sendEmbedMessage(eb.build(), "984755892794843206");
 
             //players stuff
             if (!StaticCache.onlineplayerlist.contains(player.getName())) {

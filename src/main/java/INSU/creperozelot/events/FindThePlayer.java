@@ -30,13 +30,15 @@ public class FindThePlayer {
 
         int istrue = utils.random(0, 1);
 
+        System.out.println("DEBUG 1");
+
         if (istrue == 1) {
 
 
             new BukkitRunnable() {
                 @Override
                 public void run() {
-
+                    System.out.println("DEBUG 2");
                     if (runned == 0) cancel();
 
                     int x = (int) randomplayer.getLocation().getX();
@@ -62,6 +64,7 @@ public class FindThePlayer {
                     @Override
                     public void run() {
 
+                        System.out.println("DEBUG 3");
 
                         if (runned == 0) cancel();
 

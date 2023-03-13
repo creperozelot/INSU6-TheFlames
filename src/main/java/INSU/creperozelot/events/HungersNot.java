@@ -23,7 +23,7 @@ public class HungersNot {
                 }
             }.runTaskLater(main.getInstance(),20 * 120);
 
-            AllOnlinePlayer.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 180, 2));
+            AllOnlinePlayer.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 20 * 120, 2));
         }
 
     }

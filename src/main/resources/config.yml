@@ -1,9 +1,8 @@
 main:
   main: 'creperozelot'
   map: "world"
-  kicktime:
-    hours: 20
-    minutes: 30
+  kicktime: '20-30-02'
+  playtime: '20-00-05'
   prefix: '§e§lIN§6§lSU §r§7|§6 '
   countdown:
     minutes: 15
@@ -12,13 +11,31 @@ main:
     x: 9534
     y: 98
     z: 9447
+  mapspawn:
+    start:
+      x: 114
+      z: -327
+    end:
+      x: -342
+      z: -554
+  story:
+    left_engine:
+      x: 0
+      y: 0
+      z: 0
+    right_engine:
+      x: 0
+      y: 0
+      z: 0
   #DO NOT TOUCH BEGIN-----------------------------------------------------------
   started: false
   #DO NOT TOUCH END-------------------------------------------------------------
   autorunevents: false #BETA | DEFAULT: DISABLED
 
 messages:
-  endtime: '§c§lVorbei:\n§r§cDie Zeit zum Spielen ist für heute Vorbei!'
+  endtime:
+    title: '§c§lVorbei:'
+    message: '§r§cDie Zeit zum Spielen ist für heute Vorbei!'
   errconsolerun: '§cDu kannst diese Command nur als Spieler ausführen!'
   death:
     entity_attack: '{player} ist an {entity} auf bodenloser Art und Weise gekillt worden!'
@@ -84,3 +101,4 @@ mysql:
   db: 'root'
 
   #DO NOT TOUCH THIS!
+intime: false

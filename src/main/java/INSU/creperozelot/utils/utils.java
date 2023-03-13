@@ -102,6 +102,15 @@ public class utils {
     }
 
     public static Player randomOnlinePlayer() {
+
+        if (Bukkit.getOnlinePlayers().size() == 1) {
+            ArrayList<String> player = new ArrayList<>();
+            for (Player onlineplayer : Bukkit.getOnlinePlayers()) {
+                player.add(onlineplayer.getName());
+            }
+            return Bukkit.getPlayer(player.get(0));
+        }
+
         ArrayList<String> players = new ArrayList<>();
         for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
             players.add(AllOnlinePlayers.getName());
@@ -146,8 +155,8 @@ public class utils {
 
 
     public static Location generateStartupLocation() {
-        int ran_x = random(-277, 277);
-        int ran_z = random(-297, 80);
+        int ran_x = random(main.getInstance().getConfig().getInt("mapspawn.start.x"), main.getInstance().getConfig().getInt("mapspawn.end.x"));
+        int ran_z = random(main.getInstance().getConfig().getInt("mapspawn.start.z"), main.getInstance().getConfig().getInt("mapspawn.end.z"));
         int ran_y = Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")).getHighestBlockYAt(ran_x, ran_z);
         return new Location(Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")), ran_x, ran_y, ran_z);
     }

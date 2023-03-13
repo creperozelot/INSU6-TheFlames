@@ -1,5 +1,6 @@
 package INSU.creperozelot.tasks;
 
+import INSU.creperozelot.StaticCache;
 import INSU.creperozelot.main;
 import INSU.creperozelot.utils.utils;
 import org.bukkit.Bukkit;
@@ -12,7 +13,7 @@ public class WaitingForHost {
             hostscheduler = new BukkitRunnable() {
                 @Override
                 public void run() {
-                    if (Bukkit.getPlayer(main.getInstance().getConfig().getString("main.host").replace(" ", "_")) != null) {
+                    if (StaticCache.onlineplayerlist.contains(main.getInstance().getConfig().getString("main.main"))) {
                         utils.broadcastActionbar("§e§lWarte auf Start");
                     } else {
                         utils.broadcastActionbar("§6§lWarte auf Hoster");

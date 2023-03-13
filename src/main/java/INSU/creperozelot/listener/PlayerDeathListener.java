@@ -25,14 +25,14 @@ public class PlayerDeathListener implements Listener {
 
         if (!MYSQL.isGameMaster(player.getName())) {
             player.kickPlayer("§c§lSystem: \n §cDu bist ausgeschieden und wurdest aus der Datenbank entfernt!");
-            MYSQL.update("DELETE FROM INSU WHERE PLAYER='" + player.getName() + "';");
         }
 
         EmbedBuilder eb = new EmbedBuilder();
-        eb.setTitle(player.getName()  + "ist Gestorben");
+        eb.setTitle(player.getName()  + " ist Gestorben");
         eb.setDescription(":skull_crossbones:" + event.getDeathMessage());
         eb.setColor(Color.BLACK);
         botlogic.sendEmbedMessage(eb.build(), "732648259599728661");
+        botlogic.sendEmbedMessage(eb.build(), "984755892794843206");
 
         switch (player.getLastDamageCause().getCause()) {
             case ENTITY_ATTACK:

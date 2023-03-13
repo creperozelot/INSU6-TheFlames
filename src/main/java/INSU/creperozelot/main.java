@@ -6,10 +6,7 @@ import INSU.creperozelot.dc.bot.botlogic;
 import INSU.creperozelot.events.FindTheItem;
 import INSU.creperozelot.events.InsuQuiz;
 import INSU.creperozelot.listener.*;
-import INSU.creperozelot.tasks.AutoKick;
-import INSU.creperozelot.tasks.EventManager;
-import INSU.creperozelot.tasks.LiveDisplayTask;
-import INSU.creperozelot.tasks.WaitingForHost;
+import INSU.creperozelot.tasks.*;
 import INSU.creperozelot.utils.MYSQL;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -57,6 +54,8 @@ public final class main extends JavaPlugin {
         }
         MYSQL.keepalive();
         StaticCache.Task_WaitingforHost_id = WaitingForHost.run();
+        CheckTime.run();
+        BossBarBlinking.run();
 
         //create directory
         try {
@@ -82,6 +81,7 @@ public final class main extends JavaPlugin {
         this.getLogger().info("");
         this.getLogger().info("--------------------");
         MYSQL.disconnect();
+        StaticCache.jda.shutdownNow();
     }
 
     private void registerCommand() {

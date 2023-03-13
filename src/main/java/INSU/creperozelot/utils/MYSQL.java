@@ -142,6 +142,13 @@ public class MYSQL {
         stmt.execute("UPDATE `INSU` SET `DEATH`='" + deathid + "' WHERE `PLAYER`='" + playername + "';");
     }
 
+    public static int getDeath(String playername) throws SQLException {
+        Statement stmt = con.createStatement();
+        ResultSet result = stmt.executeQuery("SELECT DEATH FROM INSU WHERE PLAYER='" + playername + "'");
+        result.first();
+        return result.getInt("DEATH");
+    }
+
     public static void setTeam(String playername, String teamname, int teamid) throws SQLException {
         Statement stmt = con.createStatement();
         stmt.execute("UPDATE `INSU` SET `TEAM`='" + teamname + "' WHERE `PLAYER`='" + playername + "';");

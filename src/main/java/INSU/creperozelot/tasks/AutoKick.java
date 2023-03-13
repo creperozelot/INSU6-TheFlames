@@ -5,20 +5,28 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class AutoKick {
     public static void run() {
-        int hours = new Date().getHours();
-        int minutes = new Date().getMinutes();
-        int conf_hour = main.getInstance().getConfig().getInt("main.kicktime.hours");
-        int conf_min = main.getInstance().getConfig().getInt("main.kicktime.minutes");
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (hours >= conf_hour && minutes >= conf_min) {
+
+                String timestamp = new SimpleDateFormat("HH-mm-ss").format(Calendar.getInstance().getTime());
+                String time = main.getInstance().getConfig().getString("main.kicktime");
+                if(timestamp.equals(time)) {
                     for (Player allonlineplayers : Bukkit.getOnlinePlayers()) {
-                        allonlineplayers.kickPlayer(main.getInstance().getConfig().getString("messages.endtime"));
+                        allonlineplayers.kickPlayer(main.getInstance().getConfig().getString("messages.endtime.title") + "\n" + main.getInstance().getConfig().getString("messages.endtime.message"));
+                    }
+                    main.getInstance().getConfig().set("intime", false);
+                    main.getInstance().saveConfig();
+
+                    if (main.getInstance().getConfig().getBoolean("intime")) {
+                        Bukkit.getServer().shutdown();
                     }
                 }
             }
