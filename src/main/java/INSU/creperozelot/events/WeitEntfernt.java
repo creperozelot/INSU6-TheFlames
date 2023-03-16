@@ -80,7 +80,7 @@ public class WeitEntfernt {
 
                 }
 
-                player.sendMessage(StaticCache.prefix + "§cDas nächste Team ist bei den Koordinaten §6" + playerdistance.getLocation().getBlockX() + " " + playerdistance.getLocation().getBlockY() + " " + playerdistance.getLocation().getBlockZ());
+                StaticCache.bossBar.setTitle("§cEvent » §a§lX: " + playerdistance.getLocation().getX() + " §a§lY: " + playerdistance.getLocation().getBlockY() + "§a§lZ: " + playerdistance.getLocation().getBlockZ());
 
             }
 

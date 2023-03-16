@@ -476,6 +476,23 @@ public class MYSQL {
         return status;
     }
 
+    public static int getKills(String playername) throws SQLException {
+
+        if (con.createStatement().executeQuery("SELECT KILLS FROM `INSU` WHERE PLAYER='" + playername + "';").next()) {
+
+            Statement stmt = con.createStatement();
+            ResultSet result = stmt.executeQuery("SELECT KILLS FROM `INSU` WHERE PLAYER='" + playername + "';");
+            result.first();
+            return result.getInt("KILLS");
+        }
+        return -1;
+    }
+
+    public static void addKill(String playername) throws SQLException {
+        Statement stmt = con.createStatement();
+        stmt.execute("UPDATE `INSU` SET `KILLS`='" + (MYSQL.getKills(playername) + 1) + "' WHERE `PLAYER`='" + playername + "';");
+    }
+
     public static boolean isGameMaster(String playername) throws SQLException {
 
         boolean i = false;

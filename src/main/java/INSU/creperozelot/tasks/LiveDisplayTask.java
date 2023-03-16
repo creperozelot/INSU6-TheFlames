@@ -24,8 +24,6 @@ public class LiveDisplayTask {
 
                                     if (teammate == null) utils.sendActionbar(AllOnlinePlayers, "§e§lDein Teammate ist nich Online!");
                                     else utils.sendActionbar(AllOnlinePlayers, "§c§lDein Partner hat noch §4§l" + (int) teammate.getHealth() + " §c§lLeben.");
-                                } else {
-                                    utils.sendActionbar(AllOnlinePlayers, "§e§lDu hast keinen Teammate oder er ist Gestorben!");
                                 }
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);

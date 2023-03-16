@@ -56,6 +56,7 @@ public final class main extends JavaPlugin {
         StaticCache.Task_WaitingforHost_id = WaitingForHost.run();
         CheckTime.run();
         BossBarBlinking.run();
+        Ranglist.run();
 
         //create directory
         try {

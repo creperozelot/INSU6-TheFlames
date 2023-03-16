@@ -32,7 +32,7 @@ public class PlayerJoinListener implements Listener {
         } else if (StaticCache.storyrunning) {
             event.getPlayer().kickPlayer("§c§lFehler: \n §cINSU Startet gerade, bitte warte kurz und versuche es nach dem Start erneut.");
             event.setJoinMessage("");
-        } else if (MYSQL.getDeath(event.getPlayer().getName()) != 0) {
+        } else if (MYSQL.getDeath(event.getPlayer().getName()) != 0 && !MYSQL.isGameMaster(event.getPlayer().getName())) {
             event.getPlayer().kickPlayer("§c§lFehler: \n §r§cDu bist aus INSU ausgeschieden!");
         } else if (!main.getInstance().getConfig().getBoolean("intime") && !MYSQL.isGameMaster(event.getPlayer().getName())) {
             event.getPlayer().kickPlayer("§c§lFehler: \n §r§cDas Projekt läuft zwischen " + main.getInstance().getConfig().getString("main.playtime") + "§c Uhr und " + main.getInstance().getConfig().getString("main.kicktime") + "§c Uhr.");

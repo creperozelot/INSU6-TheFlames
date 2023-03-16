@@ -10,7 +10,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 
 public class FindThePlayer {
-    private static int runned = 12;
+    private static int runned = 11;
     private static int test = 0;
 
     public static void run() {
@@ -25,14 +25,15 @@ public class FindThePlayer {
                 StaticCache.bossBar.setTitle(StaticCache.bossbarmsg);
             }
         }.runTaskLater(main.getInstance(), 20 * 120);
-
+        int istrue = utils.random(1, 10);
+        System.out.println(istrue);
         Player randomplayer = utils.randomOnlinePlayer();
 
-        int istrue = utils.random(0, 1);
+
 
         System.out.println("DEBUG 1");
 
-        if (istrue == 1) {
+        if (istrue < 6) {
 
 
             new BukkitRunnable() {
@@ -50,9 +51,10 @@ public class FindThePlayer {
 
                 }
             }.runTaskTimer(main.getInstance(), 0L, 20L * 10L);
+        }
 
 
-            if (istrue == 0) {
+            if (istrue >= 6) {
 
                 new BukkitRunnable() {
 
@@ -86,5 +88,4 @@ public class FindThePlayer {
                 }.runTaskTimer(main.getInstance(), 0L, 20L * 10L);
             }
         }
-    }
 }

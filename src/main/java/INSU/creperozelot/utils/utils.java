@@ -104,21 +104,15 @@ public class utils {
     public static Player randomOnlinePlayer() {
 
         if (Bukkit.getOnlinePlayers().size() == 1) {
-            ArrayList<String> player = new ArrayList<>();
-            for (Player onlineplayer : Bukkit.getOnlinePlayers()) {
-                player.add(onlineplayer.getName());
-            }
-            return Bukkit.getPlayer(player.get(0));
+            List<Player> player = new ArrayList<>(Bukkit.getOnlinePlayers());
+            return player.get(0);
         }
 
-        ArrayList<String> players = new ArrayList<>();
-        for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
-            players.add(AllOnlinePlayers.getName());
-        }
+        List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
 
         int randomaplyer = utils.random(0, players.size());
 
-        return Bukkit.getPlayer(players.get(randomaplyer));
+        return players.get(randomaplyer);
     }
 
     //TEAMCHEST INV
