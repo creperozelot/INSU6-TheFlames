@@ -20,7 +20,7 @@ public class Glueckstreffer {
                 StaticCache.bossBar.setTitle(StaticCache.bossbarmsg);
                 StaticCache.eventrunning = false;
             }
-        }.runTaskLater(main.getInstance(),20 * 120);
+        }.runTaskLater(main.getInstance(),20 * 10);
 
         for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
             int randomint = utils.random(1, 10);

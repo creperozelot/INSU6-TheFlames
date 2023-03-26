@@ -1,10 +1,10 @@
 name: INSU6
+api: [1.13.2]
 version: '${project.version}'
 main: INSU.creperozelot.main
 authors: [ creperozelot, PixelMandel ]
 description: Insu 6 Plugin
 website: https://the-flames.de
-#  depend:
 # - CrossplatForms
 commands:
   spec:

@@ -35,7 +35,6 @@ public class RandomEffekt {
         removeeffects.add(PotionEffectType.WITHER);
         removeeffects.add(PotionEffectType.INCREASE_DAMAGE);
         effects.removeAll(removeeffects);
-        System.out.println(effects);
 
         for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
             int randompotion = utils.random(0, effects.size());

@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.apache.xmlbeans.impl.xb.xsdschema.All;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -156,14 +157,15 @@ public class utils {
     }
     public static int eventanimation(String eventname, String eventname1, String eventname2, String eventname3, String eventname4, String eventname5, String eventname6) {
         broadcastTitle("§6§le", eventname1, 10, 10, 0);
-        broadcastSound(Sound.BLOCK_NOTE_BASS);
         StaticCache.bossBar.setTitle(StaticCache.prefix + "§cEvent §a" + eventname + " §cStartet...");
 
+        for (Player AllOnlinePlayers : Bukkit.getOnlinePlayers()) {
+            AllOnlinePlayers.playSound(AllOnlinePlayers.getLocation(), "event.announcment", SoundCategory.VOICE, 1.0f, 1.0f);
+        }
 
         (new BukkitRunnable() {
             public void run() {
                 broadcastTitle("§6§lven", eventname2, 0, 10, 0);
-                broadcastSound(Sound.BLOCK_NOTE_BASS);
 
             }
         }).runTaskLater((Plugin) main.getInstance(), 20L);
@@ -171,7 +173,6 @@ public class utils {
         (new BukkitRunnable() {
             public void run() {
                 broadcastTitle("§6§lEvent", eventname3, 0, 10, 0);
-                broadcastSound(Sound.BLOCK_NOTE_BASS);
 
             }
         }).runTaskLater((Plugin) main.getInstance(), 30L);
@@ -179,7 +180,6 @@ public class utils {
         (new BukkitRunnable() {
             public void run() {
                 broadcastTitle("§6§lEvent", eventname4, 0, 10, 0);
-                broadcastSound(Sound.BLOCK_NOTE_BASS);
 
             }
         }).runTaskLater((Plugin) main.getInstance(), 40L);
@@ -187,7 +187,6 @@ public class utils {
         (new BukkitRunnable() {
             public void run() {
                 broadcastTitle("§6§lEvent", eventname5, 0, 10, 0);
-                broadcastSound(Sound.BLOCK_NOTE_BASS);
 
             }
         }).runTaskLater((Plugin) main.getInstance(), 50L);
@@ -195,14 +194,12 @@ public class utils {
         (new BukkitRunnable() {
             public void run() {
                 broadcastTitle("§6§lEvent", eventname6, 0, 10, 0);
-                broadcastSound(Sound.BLOCK_NOTE_BASS);
             }
         }).runTaskLater((Plugin) main.getInstance(), 60L);
 
         (new BukkitRunnable() {
             public void run() {
                 broadcastTitle("§6§lEvent", eventname, 0, 100, 20);
-                broadcastSound(Sound.BLOCK_NOTE_BASS);
             }
         }).runTaskLater((Plugin) main.getInstance(), 70L);
 

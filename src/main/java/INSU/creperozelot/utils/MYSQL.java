@@ -448,6 +448,18 @@ public class MYSQL {
         }
     }
 
+    public static int getIDbyTeamName(String teamname) {
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet result = stmt.executeQuery("SELECT ID FROM `INSU` WHERE TEAM='" + teamname + "';");
+            result.first();
+            return result.getInt("ID");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -404;
+        }
+    }
+
     public static String getDeathStatebyName(String playername) throws SQLException {
 
         String status = "n/a";

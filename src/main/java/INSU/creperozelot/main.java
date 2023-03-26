@@ -8,6 +8,8 @@ import INSU.creperozelot.events.InsuQuiz;
 import INSU.creperozelot.listener.*;
 import INSU.creperozelot.tasks.*;
 import INSU.creperozelot.utils.MYSQL;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -41,6 +43,8 @@ public final class main extends JavaPlugin {
         this.getLogger().info("--------------------");
         registerCommand();
         registerListener();
+
+
         if  (main.getInstance().getConfig().getBoolean("main.started")) EventManager.runEventManager();
         if (main.getInstance().getConfig().getBoolean("main.started")) LiveDisplayTask.run();
         InfoMessage.deathInfo();
@@ -118,5 +122,6 @@ public final class main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new FriendlyFire(), this);
         getServer().getPluginManager().registerEvents(new PlayerMoveListener(), this);
         getServer().getPluginManager().registerEvents(new TeamchestCloseEvent(), this);
+        getServer().getPluginManager().registerEvents(new PlayerKickListener(), this);
     }
 }

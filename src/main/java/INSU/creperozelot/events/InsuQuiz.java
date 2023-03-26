@@ -112,7 +112,7 @@ public class InsuQuiz implements Listener {
                 newitems.setAmount(1);
 
                 player.getInventory().addItem(newitems);
-                player.sendMessage(StaticCache.prefix + "§aDu hast das Item " + Material.getMaterial(newitems.getTypeId()).name().replace("_", "") + " §r§aBekommen.");
+                player.sendMessage(StaticCache.prefix + "§aDu hast das Item " + Material.getMaterial(newitems.getTypeId()).name().replace("_", " ") + " §r§aBekommen.");
                 end();
             } else {
 

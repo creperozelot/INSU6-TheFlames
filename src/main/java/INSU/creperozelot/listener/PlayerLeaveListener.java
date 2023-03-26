@@ -13,15 +13,22 @@ public class PlayerLeaveListener implements Listener {
     public void PlayerLeaveListener(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         StaticCache.bossBar.removePlayer(player);
-        event.setQuitMessage(StaticCache.prefix + "Der Spieler §e" + player.getDisplayName() + "§6 hat das Projekt verlassen.");
+        event.setQuitMessage(StaticCache.prefix + "Der Spieler §e" + player.getName() + "§6 hat das Projekt verlassen.");
+
+
 
         StaticCache.onlineplayerlist.remove(player.getName());
 
-        EmbedBuilder eb = new EmbedBuilder();
-        eb.setTitle("Server Leave");
-        eb.setDescription("Der Spieler **" + player.getName() + "** hat den INSU Server verlassen!");
-        eb.setColor(java.awt.Color.RED);
-        botlogic.sendEmbedMessage(eb.build(), "732648259599728661");
-        botlogic.sendEmbedMessage(eb.build(), "984755892794843206");
+        if (!StaticCache.kickedplayerlist.contains(player.getName())) {
+            StaticCache.kickedplayerlist.remove(player.getName());
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setTitle("Server Leave");
+            eb.setDescription("Der Spieler **" + player.getName() + "** hat den INSU Server verlassen!");
+            eb.setColor(java.awt.Color.RED);
+            botlogic.sendEmbedMessage(eb.build(), "732648259599728661");
+            botlogic.sendEmbedMessage(eb.build(), "984755892794843206");
+        } else {
+            event.setQuitMessage("");
+        }
     }
 }

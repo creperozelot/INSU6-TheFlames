@@ -6,23 +6,22 @@ import INSU.creperozelot.main;
 import INSU.creperozelot.utils.MYSQL;
 import INSU.creperozelot.utils.utils;
 import net.dv8tion.jda.api.EmbedBuilder;
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.boss.BossBar;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scoreboard.*;
 
 import java.sql.SQLException;
 
 
+
 public class PlayerJoinListener implements Listener {
+
+    ScoreboardManager manager = Bukkit.getScoreboardManager();
     @EventHandler
     public void onPLayerJoin(PlayerJoinEvent event) throws SQLException {
 
@@ -47,6 +46,9 @@ public class PlayerJoinListener implements Listener {
             Player player = event.getPlayer();
             int OnlinePlayers = Bukkit.getOnlinePlayers().size();
             StaticCache.bossBar.addPlayer(player);
+
+
+
 
             event.setJoinMessage(StaticCache.prefix + "Der Spieler §e" + player.getDisplayName() + "§6 ist dem Projekt Beigetreten.");
             player.sendMessage(StaticCache.prefix + "§cBEACHTE! Alles was du sagst wird geloggt! Wähle deine Worte weise.");
