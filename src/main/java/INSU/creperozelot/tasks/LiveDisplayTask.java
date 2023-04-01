@@ -22,8 +22,7 @@ public class LiveDisplayTask {
                                     String Teammatename = Teammate.toString().replace("[", "").replace("]", "");
                                     Player teammate = Bukkit.getPlayer(Teammatename);
 
-                                    if (teammate == null) utils.sendActionbar(AllOnlinePlayers, "§e§lDein Teammate ist nich Online!");
-                                    else utils.sendActionbar(AllOnlinePlayers, "§c§lDein Partner hat noch §4§l" + (int) teammate.getHealth() + " §c§lLeben.");
+                                    if (teammate != null) utils.sendActionbar(AllOnlinePlayers, "§c§lDein Partner hat noch §4§l" + (int) teammate.getHealth() + " §c§lLeben.");
                                 }
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);

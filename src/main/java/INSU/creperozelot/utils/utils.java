@@ -129,12 +129,11 @@ public class utils {
         } else {
             file.createNewFile();
             ItemStack inititem = new ItemStack(Material.SUGAR_CANE);
-            inititem.setAmount(64);
+            inititem.setAmount(32);
             inv.addItem(inititem);
             FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);
             configuration.set("inventory.content", inv.getContents());
             configuration.save(file);
-            inv.removeItem(inititem);
             configuration.set("inventory.content", inv.getContents());
             configuration.save(file);
             ent.sendMessage(StaticCache.prefix + "§aDeine Teamchest wurde erstellt, führe den befehlt erneut aus um sie zu öffnen!");
@@ -150,9 +149,10 @@ public class utils {
 
 
     public static Location generateStartupLocation() {
-        int ran_x = random(main.getInstance().getConfig().getInt("mapspawn.start.x"), main.getInstance().getConfig().getInt("mapspawn.end.x"));
-        int ran_z = random(main.getInstance().getConfig().getInt("mapspawn.start.z"), main.getInstance().getConfig().getInt("mapspawn.end.z"));
+        int ran_x = random(-342, 114);
+        int ran_z = random(-554, -327);
         int ran_y = Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")).getHighestBlockYAt(ran_x, ran_z);
+        System.out.println("DEBUG - STARTUPLOCATION - WORLD: " + main.getInstance().getConfig().getString("main.map") + " X: " + ran_x + " Y:" + ran_y + "Z: " + ran_z);
         return new Location(Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")), ran_x, ran_y, ran_z);
     }
     public static int eventanimation(String eventname, String eventname1, String eventname2, String eventname3, String eventname4, String eventname5, String eventname6) {
@@ -165,35 +165,35 @@ public class utils {
 
         (new BukkitRunnable() {
             public void run() {
-                broadcastTitle("§6§lven", eventname2, 0, 10, 0);
+                broadcastTitle("§6§lven", eventname2, 0, 10, 20);
 
             }
         }).runTaskLater((Plugin) main.getInstance(), 20L);
 
         (new BukkitRunnable() {
             public void run() {
-                broadcastTitle("§6§lEvent", eventname3, 0, 10, 0);
+                broadcastTitle("§6§lEvent", eventname3, 0, 10, 20);
 
             }
         }).runTaskLater((Plugin) main.getInstance(), 30L);
 
         (new BukkitRunnable() {
             public void run() {
-                broadcastTitle("§6§lEvent", eventname4, 0, 10, 0);
+                broadcastTitle("§6§lEvent", eventname4, 0, 10, 20);
 
             }
         }).runTaskLater((Plugin) main.getInstance(), 40L);
 
         (new BukkitRunnable() {
             public void run() {
-                broadcastTitle("§6§lEvent", eventname5, 0, 10, 0);
+                broadcastTitle("§6§lEvent", eventname5, 0, 10, 20);
 
             }
         }).runTaskLater((Plugin) main.getInstance(), 50L);
 
         (new BukkitRunnable() {
             public void run() {
-                broadcastTitle("§6§lEvent", eventname6, 0, 10, 0);
+                broadcastTitle("§6§lEvent", eventname6, 0, 10, 20);
             }
         }).runTaskLater((Plugin) main.getInstance(), 60L);
 

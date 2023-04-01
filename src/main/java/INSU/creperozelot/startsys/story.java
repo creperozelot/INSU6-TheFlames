@@ -82,7 +82,7 @@ public class story {
                 }
 
             }
-        }.runTaskLater(main.getInstance(), 20 * 145);
+        }.runTaskLater(main.getInstance(), 20 * 125);
 
         new BukkitRunnable() {
             @Override

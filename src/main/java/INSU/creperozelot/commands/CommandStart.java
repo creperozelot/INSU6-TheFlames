@@ -31,8 +31,7 @@ public class CommandStart implements CommandExecutor {
                 Bukkit.getScheduler().cancelTask(StaticCache.Task_WaitingforHost_id);
                 StaticCache.bossbarmsg = StaticCache.prefix + "§6Infos werden hier angezeigt!";
                 StaticCache.bossBar.setTitle(StaticCache.prefix + "§6Infos werden hier angezeigt!");
-                main.getInstance().getConfig().set("main.started", true);
-                main.getInstance().saveConfig();
+
             }
         } else {
             sender.sendMessage(StaticCache.prefix + StaticCache.consoleerr);

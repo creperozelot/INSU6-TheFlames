@@ -11,12 +11,12 @@ main:
     x: 9534
     y: 98
     z: 9447
-  mapspawn:
+  mapspawn: # start.x < end.x | start.z < end.z
     start:
-      x: 114
+      x: -342
       z: -327
     end:
-      x: -342
+      x: 114
       z: -554
   story:
     left_engine:

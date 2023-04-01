@@ -28,7 +28,11 @@ public class startcountdown {
             @Override
             public void run() {
 
-                if  (countdown_min == 0) cancel();
+                if  (countdown_min == 0) {
+                    main.getInstance().getConfig().set("main.started", true);
+                    main.getInstance().saveConfig();
+                    cancel();
+                }
 
                 countdown_min--;
             }

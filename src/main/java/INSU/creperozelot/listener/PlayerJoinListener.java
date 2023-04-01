@@ -1,5 +1,6 @@
 package INSU.creperozelot.listener;
 
+import INSU.creperozelot.InterfaceManager;
 import INSU.creperozelot.StaticCache;
 import INSU.creperozelot.dc.bot.botlogic;
 import INSU.creperozelot.main;
@@ -13,10 +14,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.*;
+import org.geysermc.cumulus.form.ModalForm;
+import org.geysermc.floodgate.api.FloodgateApi;
 
 import java.sql.SQLException;
-
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class PlayerJoinListener implements Listener {
@@ -31,16 +36,32 @@ public class PlayerJoinListener implements Listener {
         } else if (StaticCache.storyrunning) {
             event.getPlayer().kickPlayer("§c§lFehler: \n §cINSU Startet gerade, bitte warte kurz und versuche es nach dem Start erneut.");
             event.setJoinMessage("");
+        } else if (!MYSQL.PlayerExist(event.getPlayer().getName())) {
+            event.getPlayer().kickPlayer("§c§lFehler: \n §r§cDu bist nicht in der Datenbank eingetragen. Dies kann folgende Gründe haben: \n §c1. Du hast dich nicht bei INSU beworben. \n §c2. Du wurdest nicht bei INSU aktzeptiert. \n §c3. Du bist Tot und bist damit AUsgeschieden.");
         } else if (MYSQL.getDeath(event.getPlayer().getName()) != 0 && !MYSQL.isGameMaster(event.getPlayer().getName())) {
             event.getPlayer().kickPlayer("§c§lFehler: \n §r§cDu bist aus INSU ausgeschieden!");
         } else if (!main.getInstance().getConfig().getBoolean("intime") && !MYSQL.isGameMaster(event.getPlayer().getName())) {
             event.getPlayer().kickPlayer("§c§lFehler: \n §r§cDas Projekt läuft zwischen " + main.getInstance().getConfig().getString("main.playtime") + "§c Uhr und " + main.getInstance().getConfig().getString("main.kicktime") + "§c Uhr.");
         } else if (!main.getInstance().getConfig().getBoolean("main.maintenance") || MYSQL.isGameMaster(event.getPlayer().getName())) {
             if (!MYSQL.isStarted(event.getPlayer().getName()) && main.getInstance().getConfig().getBoolean("main.started")) {
-                event.getPlayer().teleport(utils.generateStartupLocation());
-                MYSQL.setStarted(event.getPlayer().getName(), "true");
+
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        if (FloodgateApi.getInstance().isFloodgatePlayer(event.getPlayer().getUniqueId())) {
+                            FloodgateApi.getInstance().sendForm(event.getPlayer().getUniqueId(), InterfaceManager.startedform(event.getPlayer()));
+                        }
+                    }
+                }.runTaskLater(main.getInstance(), 20 * 10);
+
+
             } else if (!MYSQL.isStarted(event.getPlayer().getName()) && !main.getInstance().getConfig().getBoolean("main.started")) {
-                event.getPlayer().teleport(new Location(Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")), main.getInstance().getConfig().getInt("main.lobbyspawncoords.x"), main.getInstance().getConfig().getInt("main.lobbyspawncoords.y"), main.getInstance().getConfig().getInt("main.lobbyspawncoords.z")));
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        event.getPlayer().teleport(new Location(Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")), main.getInstance().getConfig().getInt("main.lobbyspawncoords.x"), main.getInstance().getConfig().getInt("main.lobbyspawncoords.y"), main.getInstance().getConfig().getInt("main.lobbyspawncoords.z")));
+                    }
+                }.runTaskLater(main.getInstance(), 20 * 5);
             }
 
             Player player = event.getPlayer();
@@ -57,12 +78,14 @@ public class PlayerJoinListener implements Listener {
             player.sendTitle("§cInformation...", "§cDu bist für 15 Skunden nicht Verwundbar", 0, 80, 20);
             player.sendMessage(StaticCache.prefix + "§aDu bist im Team §6" + MYSQL.getTeambyName(player.getName()));
 
-            EmbedBuilder eb = new EmbedBuilder();
-            eb.setTitle("Server Beitrit");
-            eb.setDescription("Der Spieler **" + player.getName() + "** ist dem INSU Server beigetreten!");
-            eb.setColor(java.awt.Color.GREEN);
-            botlogic.sendEmbedMessage(eb.build(), "732648259599728661");
-            botlogic.sendEmbedMessage(eb.build(), "984755892794843206");
+            if (!main.getInstance().getConfig().getBoolean("main.maintenance")) {
+                EmbedBuilder eb = new EmbedBuilder();
+                eb.setTitle("Server Beitrit");
+                eb.setDescription("Der Spieler **" + player.getName() + "** ist dem INSU Server beigetreten!");
+                eb.setColor(java.awt.Color.GREEN);
+                botlogic.sendEmbedMessage(eb.build(), "732648259599728661");
+                botlogic.sendEmbedMessage(eb.build(), "984755892794843206");
+            }
 
             //players stuff
             if (!StaticCache.onlineplayerlist.contains(player.getName())) {
@@ -78,9 +101,6 @@ public class PlayerJoinListener implements Listener {
                 player.setCustomName("§f" + teamname + " §8§r|§f " + player.getName());
             }
 
-            if (!MYSQL.PlayerExist(player.getName())) {
-                player.kickPlayer("§c§lFehler: \n §r§cDu bist nicht in der Datenbank eingetragen. Dies kann folgende Gründe haben: \n §c1. Du hast dich nicht bei INSU beworben. \n §c2. Du wurdest nicht bei INSU aktzeptiert. \n §c3. Du bist Tot und bist damit AUsgeschieden.");
-            }
         } else {
             Player player = event.getPlayer();
                 player.kickPlayer("§c§lWartungen: \n §r§cGerade befindet sich INSU in den Wartungen, versuche es später noch einmal.");

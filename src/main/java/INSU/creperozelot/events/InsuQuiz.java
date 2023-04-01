@@ -81,7 +81,7 @@ public class InsuQuiz implements Listener {
         answer = questions.split(";")[1].toString();
 
         main.getInstance().getServer().broadcastMessage(StaticCache.prefix + "§1Frage: §7" + question);
-        StaticCache.bossBar.setTitle("§6Event §8» §Die Frage ist §a§l" + question);
+        StaticCache.bossBar.setTitle("§6Event §8» §dDie Frage ist §a§l" + question);
 
     }
 

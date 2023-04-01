@@ -8,8 +8,6 @@ import INSU.creperozelot.events.InsuQuiz;
 import INSU.creperozelot.listener.*;
 import INSU.creperozelot.tasks.*;
 import INSU.creperozelot.utils.MYSQL;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -103,10 +101,13 @@ public final class main extends JavaPlugin {
         this.getCommand("dbreconnect").setExecutor(new CommandDBReconnect());
         this.getCommand("teamchest").setExecutor(new CommandTeamchest());
         this.getCommand("tpup").setExecutor(new CommandTPUP());
-        this.getCommand("dev_soundtest").setExecutor(new CommandsDevSoundTest());
+        this.getCommand("dev_soundtest").setExecutor(new CommandsDevTest());
         this.getCommand("strike").setExecutor(new StrikeMaincommand());
         this.getCommand("forcestart").setExecutor(new CommandForceStart());
         this.getCommand("dev_cforcestart").setExecutor(new CommandDevForceStartCountdown());
+        this.getCommand("ui").setExecutor(new CommandInterface());
+        this.getCommand("switch-mode").setExecutor(new CommandMaintenance());
+        this.getCommand("pvp").setExecutor(new CommandPVP());
     }
 
     private void registerListener() {

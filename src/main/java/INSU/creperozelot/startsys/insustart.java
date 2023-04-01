@@ -33,23 +33,13 @@ public class insustart {
 
                 List<String> players = MYSQL.getPlayerbyTeam(team);
 
-                int x = utils.random(-100, 100);
-
-                int z = utils.random(-100, 100);
-
-                Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")).loadChunk(x,z);
-
-                int y = Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")).getHighestBlockYAt(x,z);
-
-                Location loc = new Location(Bukkit.getWorld(main.getInstance().getConfig().getString("main.map")) ,x,y,z);
-
                 for (String playername : players){
 
                     if (Bukkit.getPlayer(playername) != null){
 
                         Player player = Bukkit.getPlayer(playername);
 
-                        player.teleport(loc);
+                        player.teleport(utils.generateStartupLocation());
 
                     }
 

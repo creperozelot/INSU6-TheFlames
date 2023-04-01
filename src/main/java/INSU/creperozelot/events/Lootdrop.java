@@ -43,11 +43,11 @@ public class Lootdrop {
         Chest chest = (Chest) block.getState();
 
         ItemStack item1 = new ItemStack(items.get(utils.random(0, items.size())));
-        item1.setAmount(utils.random(1, 5));
+        item1.setAmount(1);
         ItemStack item2 = new ItemStack(items.get(utils.random(0, items.size())));
-        item2.setAmount(utils.random(1, 5));
+        item2.setAmount(1);
         ItemStack item3 = new ItemStack(items.get(utils.random(0, items.size())));
-        item3.setAmount(utils.random(1, 5));
+        item3.setAmount(1);
         chest.getSnapshotInventory().setItem(utils.random(0, 26), item1);
         chest.getSnapshotInventory().setItem(utils.random(0, 26), item2);
         chest.getSnapshotInventory().setItem(utils.random(0, 26), item3);

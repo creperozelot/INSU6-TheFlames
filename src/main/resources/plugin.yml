@@ -49,8 +49,8 @@ commands:
     permission-message: §cDu hast keine Berechtigung dafür!
   teamchest:
     description: Öffnet die Teamchest!
-    permission: insu.teamchest
-    permission-message: §cDu hast keine Berechtigung dafür!
+    aliases:
+      - tc
   tpup:
     description: Tpt alle Spieler nach oben!
     permission: insu.admin.tpup
@@ -71,4 +71,20 @@ commands:
     description: Startet das Projekt unabhängig davon ob der start true oder false ist.
     permission: insu.dev.cforcestart
     permission-message: §cDu hast keine Berechtigung dafür!
-
+  ui:
+    description: Öffnet das Admin Interface.
+    permission: insu.admin.ui
+    permission-message: §cDu hast keine Berechtigung dafür!
+  switch-mode:
+    description: Setzt den wartungsmodus.
+    permission: insu.admin.maintenance
+    permission-message: §cDu hast keine Berechtigung dafür!
+    aliases:
+      - maintence
+      - maintenance
+      - wartung
+      - wartungen
+  pvp:
+    description: Setzt den PVP MODUS.
+    permission: insu.admin.setpvp
+    permission-message: §cDu hast keine Berechtigung dafür!

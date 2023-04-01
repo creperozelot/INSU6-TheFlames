@@ -5,6 +5,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -305,6 +306,50 @@ public class MYSQL {
         return players;
     }
 
+    public static boolean teammalive(Player player) throws SQLException {
+        int i = 0;
+
+        Statement stmt = con.createStatement();
+
+        ResultSet result = stmt.executeQuery("SELECT * FROM `INSU` WHERE `ID`='" + MYSQL.getIDbyName(player.getName()) + "' AND DEATH='0';");
+
+        result.first();
+
+        List<String> players = new ArrayList<>();
+
+        if (!con.createStatement().executeQuery("SELECT * FROM `INSU` WHERE `ID`='" + MYSQL.getIDbyName(player.getName()) + "' AND DEATH='0';").next()) {
+            return false;
+        }
+
+
+            while (!result.isAfterLast()) {
+
+                String team = result.getString("PLAYER");
+
+                players.add(team);
+
+                result.next();
+
+
+            }
+
+            players.remove("NONE");
+
+            while ( i != 20) {
+                players.remove("NONE" + i);
+                i++;
+            }
+
+            players.remove(player.getName());
+
+
+            if (!players.isEmpty()) {
+                return true;
+            }
+
+            return false;
+    }
+
     public static List<String> getTeammateNamesbyPlayer(Player player) throws SQLException {
         Statement stmt = con.createStatement();
 
@@ -518,6 +563,16 @@ public class MYSQL {
 
         }
         return i;
+    }
+
+    public static List<Player> getNormalOnlinePlayers() throws SQLException {
+        List<Player> players = new ArrayList<>();
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (!MYSQL.isGameMaster(player.getName())) players.add(player);
+        }
+
+        return players;
     }
 
     public static boolean TeamExist(String teamname) throws SQLException {

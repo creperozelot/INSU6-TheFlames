@@ -27,8 +27,6 @@ public class CommandTeamchest implements CommandExecutor {
             try {
                 List<String> teammatenames = new ArrayList<>(MYSQL.getTeammateNamesbyPlayer(player));
                 List<Player> teammates = new ArrayList<>();
-                if (!teammatenames.isEmpty()) {
-
                     for (String teammatenames2 : teammatenames) {
                         teammates.add(Bukkit.getPlayerExact(teammatenames2));
                     }
@@ -45,16 +43,13 @@ public class CommandTeamchest implements CommandExecutor {
                     }
 
                     utils.openTeamChest(MYSQL.getTeamIDbyName(player.getName()), player);
-
-
-                } else {
-                    sender.sendMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.errconsolerun"));
-                }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        } else {
+            sender.sendMessage(StaticCache.prefix + main.getInstance().getConfig().getString("messages.errconsolerun"));
         }
         return true;
     }
